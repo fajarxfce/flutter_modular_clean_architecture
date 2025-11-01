@@ -21,32 +21,50 @@ void main() async {
     }
   }
 
-  print('📦 Found ${pubspecFiles.length} packages:\n');
+  print('📦 Found ${pubspecFiles.length} packages\n');
+  print('⚡ Running flutter pub get in parallel...\n');
 
-  var successCount = 0;
-  var failCount = 0;
-
-  for (final pubspec in pubspecFiles) {
+  // Run flutter pub get in parallel
+  final futures = pubspecFiles.map((pubspec) async {
     final packageDir = pubspec.parent;
     final packageName = packageDir.path.split('/').last;
-
-    print('  📥 Getting dependencies for $packageName...');
 
     final result = await Process.run('flutter', [
       'pub',
       'get',
     ], workingDirectory: packageDir.path);
 
-    if (result.exitCode == 0) {
-      print('     ✅ Success\n');
+    return {
+      'name': packageName,
+      'success': result.exitCode == 0,
+      'error': result.exitCode != 0 ? result.stderr.toString() : null,
+    };
+  }).toList();
+
+  final results = await Future.wait(futures);
+
+  // Print results
+  var successCount = 0;
+  var failCount = 0;
+
+  for (final result in results) {
+    final name = result['name'] as String;
+    final success = result['success'] as bool;
+    final error = result['error'] as String?;
+
+    if (success) {
+      print('  ✅ $name');
       successCount++;
     } else {
-      print('     ❌ Failed: ${result.stderr}\n');
+      print('  ❌ $name');
+      if (error != null) {
+        print('     Error: $error');
+      }
       failCount++;
     }
   }
 
-  print('═' * 50);
+  print('\n' + '═' * 50);
   print('✨ Bootstrap completed!');
   print('   ✅ Success: $successCount packages');
   if (failCount > 0) {
