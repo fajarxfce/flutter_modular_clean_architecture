@@ -7,37 +7,33 @@ import 'package:login_presentation/src/bloc/login_event.dart';
 
 @RoutePage()
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final String? hello;
+  const LoginPage({super.key, @queryParam this.hello});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => GetIt.instance<LoginBloc>(),
-      child: const LoginView(),
-    );
-  }
-}
-
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            const Text('Welcome to the Login Page!'),
-            OutlinedButton(
-              onPressed: () {
-                context.read<LoginBloc>().add(
-                  const OnNavigateToRegisterEvent(),
-                );
-              },
-              child: const Text('Go to Register'),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            body: Center(
+              child: Column(
+                children: [
+                  Text(hello ?? 'Welcome to the Login Page!'),
+                  OutlinedButton(
+                    onPressed: () {
+                      context.read<LoginBloc>().add(
+                        OnNavigateToRegisterEvent(),
+                      );
+                    },
+                    child: const Text('Login'),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

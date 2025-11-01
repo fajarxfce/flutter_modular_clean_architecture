@@ -16,6 +16,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingUiState> {
     OnNavigateToLogin event,
     Emitter<OnboardingUiState> emit,
   ) {
-    _appNavigator.navigateToLogin();
+    _appNavigator.navigateToLogin('Hello from OnboardingBloc');
   }
 }

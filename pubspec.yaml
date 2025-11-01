@@ -309,39 +309,6 @@ melos:
         echo "✅ Quick checks passed!"
       description: Quick check (format & analyze only)
 
-    # === Run Application ===
-    # Run app di debug mode
-    run:
-      run: flutter run
-      description: Run the main Flutter app in debug mode
-
-    # Run app dengan device specific
-    run_android:
-      run: flutter run -d android
-      description: Run the app on Android device/emulator
-
-    run_ios:
-      run: flutter run -d ios
-      description: Run the app on iOS device/simulator
-
-    run_chrome:
-      run: flutter run -d chrome
-      description: Run the app in Chrome browser
-
-    run_linux:
-      run: flutter run -d linux
-      description: Run the app on Linux desktop
-
-    # Run app di release mode
-    run_release:
-      run: flutter run --release
-      description: Run the app in release mode (optimized)
-
-    # Run app dengan hot reload selalu enabled
-    run_hot:
-      run: flutter run --hot
-      description: Run with hot reload enabled
-
     # === Development Workflow ===
     # Full dev setup: bootstrap + build + run
     dev:

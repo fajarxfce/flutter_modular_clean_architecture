@@ -12,8 +12,8 @@ class AppNavigatorImpl implements AppNavigator {
   void navigateToHome() {}
 
   @override
-  void navigateToLogin() {
-    _appRouter.replace(const LoginRoute());
+  void navigateToLogin(String? hello) {
+    _appRouter.replace(LoginRoute(hello: hello));
   }
 
   @override
