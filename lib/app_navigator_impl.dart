@@ -8,26 +8,41 @@ import 'package:register_presentation/register.dart';
 class AppNavigatorImpl implements AppNavigator {
   final AppRouter _appRouter;
   AppNavigatorImpl(this._appRouter);
-  @override
-  void navigateToHome() {}
 
   @override
-  void navigateToLogin(String? hello) {
-    _appRouter.replace(LoginRoute(hello: hello));
+  Future<void> navigateToHome() async {
+    // TODO: Create HomeRoute
+    // await _appRouter.replace(const HomeRoute());
   }
 
   @override
-  void navigateToOnboarding() {
+  Future<void> navigateToLogin(String? hello) async {
+    await _appRouter.replace(LoginRoute(hello: hello));
+  }
+
+  @override
+  Future<void> navigateToOnboarding() async {
     // TODO: implement navigateToOnboarding
+    // await _appRouter.replace(const OnBoardingRoute());
   }
 
   @override
-  void navigateToRegister() {
-    _appRouter.push(const RegisterRoute());
+  Future<void> navigateToRegister() async {
+    await _appRouter.push(const RegisterRoute());
   }
 
   @override
-  void navigateBack() {
-    _appRouter.pop();
+  void navigateBack<T>([T? result]) {
+    _appRouter.maybePop(result);
+  }
+
+  @override
+  Future<T?> navigateToRegisterForResult<T>() async {
+    return await _appRouter.push<T>(const RegisterRoute());
+  }
+
+  @override
+  Future<T?> navigateToAddProduct<T>() async {
+    throw UnimplementedError('AddProductRoute not created yet');
   }
 }

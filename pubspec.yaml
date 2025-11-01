@@ -133,7 +133,7 @@ melos:
     build:
       run: dart run build_runner build --delete-conflicting-outputs
       exec:
-        concurrency: 3
+        concurrency: 7
         failFast: false
       description: Run build_runner build in all packages (max 3 concurrent)
       packageFilters:
@@ -157,7 +157,7 @@ melos:
     build_clean:
       run: dart run build_runner clean
       exec:
-        concurrency: 3
+        concurrency: 7
       description: Clean generated files
       packageFilters:
         dependsOn: "build_runner"
@@ -167,7 +167,7 @@ melos:
     analyze:
       run: flutter analyze
       exec:
-        concurrency: 3
+        concurrency: 7
       description: Run flutter analyze in all packages
 
     # Format all dart files
@@ -179,7 +179,7 @@ melos:
     fix:
       run: dart fix --apply
       exec:
-        concurrency: 3
+        concurrency: 7
       description: Auto-fix lint issues
 
     # === Testing ===
@@ -187,7 +187,7 @@ melos:
     test:
       run: flutter test
       exec:
-        concurrency: 3
+        concurrency: 7
         failFast: false
       description: Run tests in all packages
       packageFilters:
@@ -197,7 +197,7 @@ melos:
     test_coverage:
       run: flutter test --coverage
       exec:
-        concurrency: 3
+        concurrency: 7
       description: Run tests with coverage
       packageFilters:
         dirExists: "test"
@@ -207,7 +207,7 @@ melos:
     clean:
       run: flutter clean
       exec:
-        concurrency: 3
+        concurrency: 7
       description: Clean all packages
 
     # Deep clean (termasuk pub cache)
@@ -225,14 +225,14 @@ melos:
     get:
       run: flutter pub get
       exec:
-        concurrency: 3
+        concurrency: 7
       description: Get dependencies in all packages
 
     # Upgrade dependencies
     upgrade:
       run: flutter pub upgrade
       exec:
-        concurrency: 3
+        concurrency: 7
       description: Upgrade dependencies in all packages
 
     # Check for outdated packages
@@ -250,7 +250,7 @@ melos:
     build_presentation:
       run: dart run build_runner build --delete-conflicting-outputs
       exec:
-        concurrency: 3
+        concurrency: 7
       description: Build code gen for presentation packages only
       packageFilters:
         scope: "*_presentation"
@@ -274,7 +274,7 @@ melos:
     analyze_changed:
       run: flutter analyze
       exec:
-        concurrency: 3
+        concurrency: 7
       description: Analyze only changed packages
       packageFilters:
         diff: "origin/main"

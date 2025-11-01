@@ -1,7 +1,11 @@
 abstract class AppNavigator {
-  void navigateToOnboarding();
-  void navigateToHome();
-  void navigateToLogin(String? hello);
-  void navigateToRegister();
-  void navigateBack();
+  Future<void> navigateToOnboarding();
+  Future<void> navigateToHome();
+  Future<void> navigateToLogin(String? hello);
+  Future<void> navigateToRegister();
+
+  void navigateBack<T>([T? result]);
+
+  Future<T?> navigateToRegisterForResult<T>();
+  Future<T?> navigateToAddProduct<T>();
 }
