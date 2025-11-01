@@ -1,0 +1,11 @@
+targets:
+  $default:
+    builders:
+      auto_route_generator:auto_route_generator:
+        options:
+          inputs:
+            - "package:packages/features/onboarding/presentation/**"
+            - "package:login_presentation/**"
+            - "lib/**"
+          generate_for:
+            - "lib/router/app_router.dart"
