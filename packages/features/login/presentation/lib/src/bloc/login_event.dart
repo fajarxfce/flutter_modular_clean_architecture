@@ -6,9 +6,18 @@ class OnNavigateToRegisterEvent extends LoginEvent {
   const OnNavigateToRegisterEvent();
 }
 
-class OnLoginSubmittedEvent extends LoginEvent {
+class OnEmailChangedEvent extends LoginEvent {
   final String email;
+
+  const OnEmailChangedEvent(this.email);
+}
+
+class OnPasswordChangedEvent extends LoginEvent {
   final String password;
 
-  const OnLoginSubmittedEvent({required this.email, required this.password});
+  const OnPasswordChangedEvent(this.password);
+}
+
+class OnLoginSubmittedEvent extends LoginEvent {
+  const OnLoginSubmittedEvent();
 }

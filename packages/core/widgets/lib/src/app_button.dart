@@ -57,6 +57,7 @@ class AppButton extends StatelessWidget {
   final IconData? icon;
   final bool isLoading;
   final bool fullWidth;
+  final bool isEnabled;
 
   const AppButton({
     super.key,
@@ -67,6 +68,7 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.isLoading = false,
     this.fullWidth = false,
+    this.isEnabled = true,
   });
 
   // Named constructors for common variants
@@ -78,6 +80,7 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.isLoading = false,
     this.fullWidth = false,
+    this.isEnabled = true,
   }) : variant = AppButtonVariant.primary;
 
   const AppButton.secondary({
@@ -88,6 +91,7 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.isLoading = false,
     this.fullWidth = false,
+    this.isEnabled = true,
   }) : variant = AppButtonVariant.secondary;
 
   const AppButton.destructive({
@@ -98,6 +102,7 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.isLoading = false,
     this.fullWidth = false,
+    this.isEnabled = true,
   }) : variant = AppButtonVariant.destructive;
 
   const AppButton.ghost({
@@ -108,6 +113,7 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.isLoading = false,
     this.fullWidth = false,
+    this.isEnabled = true,
   }) : variant = AppButtonVariant.ghost;
 
   const AppButton.link({
@@ -118,6 +124,7 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.isLoading = false,
     this.fullWidth = false,
+    this.isEnabled = true,
   }) : variant = AppButtonVariant.link;
 
   @override
@@ -125,7 +132,6 @@ class AppButton extends StatelessWidget {
     final buttonHeight = _getHeight();
     final horizontalPadding = _getHorizontalPadding();
     final fontSize = _getFontSize();
-    final isEnabled = onPressed != null && !isLoading;
 
     return SizedBox(
       height: buttonHeight,

@@ -1,31 +1,34 @@
-/// UI State for Login feature.
-///
-/// State represents the current UI representation, NOT one-time events.
-/// For one-time events (navigation, dialogs, etc), use [LoginEffect].
-enum LoginStatus {
-  /// Initial state, showing login form
-  initial,
-
-  /// Loading state, showing progress indicator
-  loading,
-
-  /// Success state, user data loaded (but navigation is handled by Effect)
-  success,
-}
+enum LoginStatus { initial, loading, success }
 
 class LoginUiState {
   final LoginStatus status;
   final String email;
+  final String password;
 
-  const LoginUiState({required this.status, this.email = ''});
+  const LoginUiState({
+    required this.status,
+    this.email = '',
+    this.password = '',
+  });
 
   factory LoginUiState.initial() =>
       const LoginUiState(status: LoginStatus.initial);
 
-  LoginUiState copyWith({LoginStatus? status, String? email}) {
+  bool get isEmailEmpty => email.isEmpty;
+
+  bool get isPasswordEmpty => password.isEmpty;
+
+  bool get isFormValid => email.isNotEmpty && password.isNotEmpty;
+
+  LoginUiState copyWith({
+    LoginStatus? status,
+    String? email,
+    String? password,
+  }) {
     return LoginUiState(
       status: status ?? this.status,
       email: email ?? this.email,
+      password: password ?? this.password,
     );
   }
 }

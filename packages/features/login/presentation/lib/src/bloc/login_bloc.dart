@@ -9,6 +9,8 @@ class LoginBloc extends BlocWithEffect<LoginEvent, LoginUiState, LoginEffect> {
   final AppNavigator _appNavigator;
   LoginBloc(this._appNavigator) : super(LoginUiState.initial()) {
     on<OnNavigateToRegisterEvent>(_onNavigateToRegister);
+    on<OnEmailChangedEvent>(_onEmailChanged);
+    on<OnPasswordChangedEvent>(_onPasswordChanged);
     on<OnLoginSubmittedEvent>(_onLoginSubmitted);
   }
 
@@ -19,6 +21,17 @@ class LoginBloc extends BlocWithEffect<LoginEvent, LoginUiState, LoginEffect> {
     await _appNavigator.navigateToRegister();
   }
 
+  void _onEmailChanged(OnEmailChangedEvent event, Emitter<LoginUiState> emit) {
+    emit(state.copyWith(email: event.email));
+  }
+
+  void _onPasswordChanged(
+    OnPasswordChangedEvent event,
+    Emitter<LoginUiState> emit,
+  ) {
+    emit(state.copyWith(password: event.password));
+  }
+
   Future<void> _onLoginSubmitted(
     OnLoginSubmittedEvent event,
     Emitter<LoginUiState> emit,
@@ -27,18 +40,17 @@ class LoginBloc extends BlocWithEffect<LoginEvent, LoginUiState, LoginEffect> {
 
     await Future.delayed(const Duration(seconds: 2));
 
-    final isSuccess = event.email == '123';
+    final isSuccess = state.email.isNotEmpty && state.password.isNotEmpty;
 
     if (isSuccess) {
-      emit(state.copyWith(status: LoginStatus.success, email: event.email));
+      emit(state.copyWith(status: LoginStatus.success));
 
-      await _appNavigator.navigateToHome();
-
+      emitEffect(const NavigateToDashboard());
       emitEffect(const ShowSuccessSnackbar('Login successful!'));
     } else {
       emit(state.copyWith(status: LoginStatus.initial));
 
-      emitEffect(const ShowErrorDialog('Invalid credentials'));
+      emitEffect(const ShowErrorDialog('Please enter email and password'));
     }
   }
 }
