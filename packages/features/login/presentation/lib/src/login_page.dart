@@ -33,7 +33,12 @@ class _LoginPageState extends State<LoginPage> {
       create: (_) => GetIt.instance<LoginBloc>(),
       child: Builder(
         builder: (context) {
-          return BlocEffectConsumer<LoginBloc, LoginUiState, LoginEffect>(
+          return BlocEffectConsumer<
+            LoginBloc,
+            LoginEvent,
+            LoginUiState,
+            LoginEffect
+          >(
             builder: (context, state) {
               return Scaffold(
                 appBar: AppBar(

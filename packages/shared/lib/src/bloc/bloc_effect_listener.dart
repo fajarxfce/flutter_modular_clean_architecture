@@ -3,28 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc_with_effect.dart';
 
-/// A widget that only listens to effects without rebuilding on state changes.
-///
-/// This is useful when you only need to handle side effects (navigation, dialogs, etc.)
-/// without rebuilding the widget tree.
-///
-/// Example:
-/// ```dart
-/// BlocEffectListener<LoginBloc, LoginEffect>(
-///   listener: (context, effect) {
-///     if (effect is ShowSuccessSnackbar) {
-///       ScaffoldMessenger.of(context).showSnackBar(
-///         SnackBar(content: Text(effect.message)),
-///       );
-///     }
-///     if (effect is NavigateToHome) {
-///       Navigator.pushReplacementNamed(context, '/home');
-///     }
-///   },
-///   child: LoginForm(),
-/// )
-/// ```
-class BlocEffectListener<B extends BlocWithEffect<dynamic, dynamic, E>, E>
+class BlocEffectListener<B extends BlocWithEffect<Event, S, E>, Event, S, E>
     extends StatefulWidget {
   const BlocEffectListener({
     super.key,
@@ -34,25 +13,26 @@ class BlocEffectListener<B extends BlocWithEffect<dynamic, dynamic, E>, E>
     this.listenWhen,
   });
 
-  /// The [BlocWithEffect] instance. If not provided, will use [BlocProvider.of].
   final B? bloc;
 
-  /// Listener function for side effects (single-shot events).
   final void Function(BuildContext context, E effect) listener;
 
-  /// The child widget (won't rebuild on state changes).
   final Widget child;
 
-  /// Optional condition to determine when to trigger effect listener.
   final bool Function(E effect)? listenWhen;
 
   @override
-  State<BlocEffectListener<B, E>> createState() =>
-      _BlocEffectListenerState<B, E>();
+  State<BlocEffectListener<B, Event, S, E>> createState() =>
+      _BlocEffectListenerState<B, Event, S, E>();
 }
 
-class _BlocEffectListenerState<B extends BlocWithEffect<dynamic, dynamic, E>, E>
-    extends State<BlocEffectListener<B, E>> {
+class _BlocEffectListenerState<
+  B extends BlocWithEffect<Event, S, E>,
+  Event,
+  S,
+  E
+>
+    extends State<BlocEffectListener<B, Event, S, E>> {
   late B _bloc;
   StreamSubscription<E>? _effectSubscription;
 
@@ -64,7 +44,7 @@ class _BlocEffectListenerState<B extends BlocWithEffect<dynamic, dynamic, E>, E>
   }
 
   @override
-  void didUpdateWidget(BlocEffectListener<B, E> oldWidget) {
+  void didUpdateWidget(BlocEffectListener<B, Event, S, E> oldWidget) {
     super.didUpdateWidget(oldWidget);
     final oldBloc = oldWidget.bloc ?? _bloc;
     final currentBloc = widget.bloc ?? _bloc;
