@@ -1,4 +1,4 @@
-name: data
+name: login_data
 description: "A new Flutter module project."
 
 # The following defines the version and build number for your application.
@@ -17,8 +17,14 @@ description: "A new Flutter module project."
 # your Flutter project into.
 version: 1.0.0+1
 
+
 environment:
+
+
   sdk: ^3.9.2
+
+
+resolution: workspace
 
 dependencies:
   flutter:
@@ -73,7 +79,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-
 
   # This section identifies your Flutter project as a module meant for
   # embedding in a native host app.  These identifiers should _not_ ordinarily

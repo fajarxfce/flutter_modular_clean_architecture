@@ -21,6 +21,22 @@ version: 1.0.0+1
 environment:
   sdk: ^3.9.2
 
+# Pub workspaces - list all packages manually (globs not supported yet)
+workspace:
+  - packages/core/network
+  - packages/core/widgets
+  - packages/features/login/data
+  - packages/features/login/domain
+  - packages/features/login/presentation
+  - packages/features/onboarding/data
+  - packages/features/onboarding/domain
+  - packages/features/onboarding/presentation
+  - packages/features/register/data
+  - packages/features/register/domain
+  - packages/features/register/presentation
+  - packages/navigation
+  - packages/shared
+
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -98,3 +114,251 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# Melos configuration (migrated from melos.yaml)
+melos:
+  command:
+    bootstrap:
+      runPubGetInParallel: true # Enable parallel pub get for faster bootstrap
+
+  scripts:
+    # === Bootstrap ===
+    # Bootstrap dengan custom tool (alternatif)
+    bs_custom:
+      run: dart tool/bootstrap.dart
+      description: Bootstrap with custom concurrent script
+
+    # === Build Runner ===
+    # Build - run build_runner di packages yang punya build_runner
+    build:
+      run: dart run build_runner build --delete-conflicting-outputs
+      exec:
+        concurrency: 3
+        failFast: false
+      description: Run build_runner build in all packages (max 3 concurrent)
+      packageFilters:
+        dependsOn: "build_runner"
+
+    # Build dengan custom tool (alternatif)
+    build_custom:
+      run: dart tool/build.dart
+      description: Build with custom concurrent script
+
+    # Watch - sequential karena long-running process
+    build_watch:
+      run: dart run build_runner watch --delete-conflicting-outputs
+      exec:
+        concurrency: 1
+      description: Run build_runner watch
+      packageFilters:
+        dependsOn: "build_runner"
+
+    # Clean generated files
+    build_clean:
+      run: dart run build_runner clean
+      exec:
+        concurrency: 3
+      description: Clean generated files
+      packageFilters:
+        dependsOn: "build_runner"
+
+    # === Code Quality ===
+    # Analyze all packages
+    analyze:
+      run: flutter analyze
+      exec:
+        concurrency: 3
+      description: Run flutter analyze in all packages
+
+    # Format all dart files
+    format:
+      run: dart format .
+      description: Format all Dart files in workspace
+
+    # Fix lint issues
+    fix:
+      run: dart fix --apply
+      exec:
+        concurrency: 3
+      description: Auto-fix lint issues
+
+    # === Testing ===
+    # Run tests in all packages
+    test:
+      run: flutter test
+      exec:
+        concurrency: 3
+        failFast: false
+      description: Run tests in all packages
+      packageFilters:
+        dirExists: "test"
+
+    # Test with coverage
+    test_coverage:
+      run: flutter test --coverage
+      exec:
+        concurrency: 3
+      description: Run tests with coverage
+      packageFilters:
+        dirExists: "test"
+
+    # === Clean ===
+    # Clean build artifacts
+    clean:
+      run: flutter clean
+      exec:
+        concurrency: 3
+      description: Clean all packages
+
+    # Deep clean (termasuk pub cache)
+    clean_deep:
+      run: |
+        flutter clean
+        rm -rf .dart_tool
+        rm -rf pubspec.lock
+      exec:
+        concurrency: 1
+      description: Deep clean including .dart_tool and pubspec.lock
+
+    # === Dependency Management ===
+    # Get dependencies di semua packages
+    get:
+      run: flutter pub get
+      exec:
+        concurrency: 3
+      description: Get dependencies in all packages
+
+    # Upgrade dependencies
+    upgrade:
+      run: flutter pub upgrade
+      exec:
+        concurrency: 3
+      description: Upgrade dependencies in all packages
+
+    # Check for outdated packages
+    outdated:
+      run: flutter pub outdated
+      exec:
+        concurrency: 1
+      description: Check outdated dependencies
+
+    # === Utilities ===
+    # Note: melos list, melos list --long, melos list --graph are built-in commands
+
+    # === Feature-specific ===
+    # Build hanya presentation layers
+    build_presentation:
+      run: dart run build_runner build --delete-conflicting-outputs
+      exec:
+        concurrency: 3
+      description: Build code gen for presentation packages only
+      packageFilters:
+        scope: "*_presentation"
+        dependsOn: "build_runner"
+
+    # Test hanya feature packages
+    test_features:
+      run: flutter test
+      exec:
+        concurrency: 5
+        failFast: false
+      description: Test all feature packages (presentation, domain, data)
+      packageFilters:
+        scope:
+          - "*_presentation"
+          - "*_domain"
+          - "*_data"
+        dirExists: "test"
+
+    # Analyze hanya yang berubah (untuk CI/CD)
+    analyze_changed:
+      run: flutter analyze
+      exec:
+        concurrency: 3
+      description: Analyze only changed packages
+      packageFilters:
+        diff: "origin/main"
+
+    # Test hanya yang berubah
+    test_changed:
+      run: flutter test
+      exec:
+        concurrency: 5
+      description: Test only changed packages
+      packageFilters:
+        diff: "origin/main"
+        dirExists: "test"
+
+    # === CI/CD ===
+    # Full check untuk pre-commit/CI
+    check:
+      run: |
+        echo "🔍 Running code quality checks..."
+        melos run format
+        melos run analyze
+        melos run test
+        echo "✅ All checks passed!"
+      description: Full quality check (format, analyze, test)
+
+    # Quick check (tanpa test)
+    check_quick:
+      run: |
+        echo "⚡ Running quick checks..."
+        melos run format
+        melos run analyze
+        echo "✅ Quick checks passed!"
+      description: Quick check (format & analyze only)
+
+    # === Run Application ===
+    # Run app di debug mode
+    run:
+      run: flutter run
+      description: Run the main Flutter app in debug mode
+
+    # Run app dengan device specific
+    run_android:
+      run: flutter run -d android
+      description: Run the app on Android device/emulator
+
+    run_ios:
+      run: flutter run -d ios
+      description: Run the app on iOS device/simulator
+
+    run_chrome:
+      run: flutter run -d chrome
+      description: Run the app in Chrome browser
+
+    run_linux:
+      run: flutter run -d linux
+      description: Run the app on Linux desktop
+
+    # Run app di release mode
+    run_release:
+      run: flutter run --release
+      description: Run the app in release mode (optimized)
+
+    # Run app dengan hot reload selalu enabled
+    run_hot:
+      run: flutter run --hot
+      description: Run with hot reload enabled
+
+    # === Development Workflow ===
+    # Full dev setup: bootstrap + build + run
+    dev:
+      run: |
+        echo "🚀 Setting up development environment..."
+        melos bootstrap
+        echo "🔨 Building generated files..."
+        melos run build
+        echo "▶️  Starting app..."
+        flutter run
+      description: Complete dev setup (bootstrap + build + run)
+
+    # Quick dev: skip bootstrap kalau udah ada
+    dev_quick:
+      run: |
+        echo "🔨 Building generated files..."
+        melos run build
+        echo "▶️  Starting app..."
+        flutter run
+      description: Quick dev (build + run without bootstrap)
