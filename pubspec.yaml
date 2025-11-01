@@ -329,3 +329,35 @@ melos:
         echo "▶️  Starting app..."
         flutter run
       description: Quick dev (build + run without bootstrap)
+
+    # === Maintenance ===
+    # Update SDK version across all packages
+    update_sdk:
+      run: |
+        echo "📦 Current SDK constraint: ^3.9.2"
+        echo "Enter new SDK version (e.g., 3.10.0):"
+        read NEW_SDK
+        echo "🔄 Updating SDK to ^$NEW_SDK in all packages..."
+        find packages -name "pubspec.yaml" -exec sed -i "s/sdk: \^[0-9.]\+/sdk: ^$NEW_SDK/g" {} \;
+        echo "✅ SDK updated in all packages!"
+        echo "Don't forget to update root pubspec.yaml manually"
+      description: Update SDK version across all packages
+
+    # Sync version from root to all packages (optional)
+    sync_version:
+      run: |
+        ROOT_VERSION=$(grep "^version:" pubspec.yaml | head -1 | awk '{print $2}')
+        echo "📦 Root version: $ROOT_VERSION"
+        echo "🔄 Syncing version to all packages..."
+        find packages -name "pubspec.yaml" -exec sed -i "s/^version: .*/version: $ROOT_VERSION/" {} \;
+        echo "✅ Version synced to all packages!"
+      description: Sync version from root to all packages
+
+    # Remove version from all packages (for internal packages)
+    remove_version:
+      run: |
+        echo "🗑️  Removing version from all internal packages..."
+        find packages -name "pubspec.yaml" -exec sed -i '/^version: /d' {} \;
+        echo "✅ Version field removed from all packages!"
+        echo "ℹ️  Version is now only managed in root pubspec.yaml"
+      description: Remove version field from internal packages

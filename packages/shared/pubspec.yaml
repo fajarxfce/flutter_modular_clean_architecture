@@ -16,14 +16,10 @@ publish_to: none
 # This version is used _only_ for the Runner app, which is used if you just do
 # a `flutter run`. It has no impact on any other native host app that you embed
 # your Flutter project into.
-version: 1.0.0+1
 
 
 environment:
-
-
   sdk: ^3.9.2
-
 
 resolution: workspace
 

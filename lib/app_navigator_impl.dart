@@ -25,4 +25,9 @@ class AppNavigatorImpl implements AppNavigator {
   void navigateToRegister() {
     _appRouter.push(const RegisterRoute());
   }
+
+  @override
+  void navigateBack() {
+    _appRouter.pop();
+  }
 }

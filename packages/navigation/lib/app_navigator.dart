@@ -3,4 +3,5 @@ abstract class AppNavigator {
   void navigateToHome();
   void navigateToLogin(String? hello);
   void navigateToRegister();
+  void navigateBack();
 }
