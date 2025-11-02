@@ -94,25 +94,19 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
               ),
               const SizedBox(height: 24),
 
-              // ✅ Include email+password values to detect changes!
               BlocSelector<
                 LoginBloc,
                 LoginUiState,
-                ({bool isLoading, String email, String password})
+                ({bool isFormValid, bool isLoading})
               >(
                 selector: (state) => (
+                  isFormValid: state.isFormValid,
                   isLoading: state.status == LoginStatus.loading,
-                  email: state.email, // ✅ Track actual value
-                  password: state.password, // ✅ Track actual value
                 ),
                 builder: (context, data) {
-                  // Compute isEnabled here from actual values
-                  final isEnabled =
-                      data.email.isNotEmpty && data.password.isNotEmpty;
-
                   return AppButton.primary(
                     text: 'Sign In',
-                    onPressed: (data.isLoading || !isEnabled)
+                    onPressed: (!data.isFormValid)
                         ? null
                         : () {
                             context.read<LoginBloc>().add(
@@ -121,6 +115,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                           },
                     fullWidth: true,
                     isLoading: data.isLoading,
+                    isEnabled: data.isFormValid,
                   );
                 },
               ),

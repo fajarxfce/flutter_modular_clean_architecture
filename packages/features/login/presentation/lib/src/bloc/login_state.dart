@@ -33,4 +33,7 @@ class LoginUiState extends BaseState {
       password: password ?? this.password,
     );
   }
+
+  @override
+  List<Object?> get props => [status, email, password];
 }
