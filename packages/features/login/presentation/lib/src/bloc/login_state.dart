@@ -1,6 +1,8 @@
+import 'package:shared/shared.dart';
+
 enum LoginStatus { initial, loading, success }
 
-class LoginUiState {
+class LoginUiState extends BaseState {
   final LoginStatus status;
   final String email;
   final String password;

@@ -1,4 +1,6 @@
-abstract class LoginEvent {
+import 'package:shared/shared.dart';
+
+abstract class LoginEvent extends BaseEvent {
   const LoginEvent();
 }
 

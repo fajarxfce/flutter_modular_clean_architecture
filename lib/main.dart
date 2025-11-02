@@ -3,7 +3,7 @@ import 'package:flutter_modular_clean_architecture/di/di.dart';
 import 'package:flutter_modular_clean_architecture/router/app_router.dart';
 import 'package:flutter_modular_clean_architecture/ui/theme.dart';
 
-Future<void> main(List<String> args) async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   runApp(const App());

@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:login_presentation/src/bloc/login_event.dart';
 import 'package:login_presentation/src/bloc/login_state.dart';
 import 'package:login_presentation/src/bloc/login_effect.dart';
@@ -5,7 +6,7 @@ import 'package:navigation/app_navigator.dart';
 import 'package:shared/shared.dart';
 
 @injectable
-class LoginBloc extends BlocWithEffect<LoginEvent, LoginUiState, LoginEffect> {
+class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
   final AppNavigator _appNavigator;
   LoginBloc(this._appNavigator) : super(LoginUiState.initial()) {
     on<OnNavigateToRegisterEvent>(_onNavigateToRegister);
@@ -21,14 +22,19 @@ class LoginBloc extends BlocWithEffect<LoginEvent, LoginUiState, LoginEffect> {
     await _appNavigator.navigateToRegister();
   }
 
-  void _onEmailChanged(OnEmailChangedEvent event, Emitter<LoginUiState> emit) {
+  Future<void> _onEmailChanged(
+    OnEmailChangedEvent event,
+    Emitter<LoginUiState> emit,
+  ) async {
+    debugPrint('Email changed: ${state.isFormValid}');
     emit(state.copyWith(email: event.email));
   }
 
-  void _onPasswordChanged(
+  Future<void> _onPasswordChanged(
     OnPasswordChangedEvent event,
     Emitter<LoginUiState> emit,
-  ) {
+  ) async {
+    debugPrint('Password changed: ${state.isFormValid}');
     emit(state.copyWith(password: event.password));
   }
 
