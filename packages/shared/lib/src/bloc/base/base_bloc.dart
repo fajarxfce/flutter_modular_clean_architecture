@@ -1,3 +1,4 @@
+import 'package:blocfx/blocfx.dart';
 import 'package:shared/shared.dart';
 
 abstract class BaseBloc<
@@ -14,6 +15,6 @@ abstract class BaseBlocDelegate<
   S extends BaseState,
   F extends BaseEffect
 >
-    extends BlocWithEffect<E, S, F> {
+    extends BlocFx<E, S, F> {
   BaseBlocDelegate(super.initialState);
 }

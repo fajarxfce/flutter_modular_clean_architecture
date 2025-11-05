@@ -1,3 +1,4 @@
+import 'package:blocfx/blocfx.dart';
 import 'package:flutter/material.dart';
 import 'package:login_presentation/src/bloc/login_bloc.dart';
 import 'package:login_presentation/src/bloc/login_effect.dart';
@@ -18,8 +19,29 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
   @override
   Widget buildPage(BuildContext context) {
-    return BlocEffectListener<LoginBloc, LoginEvent, LoginUiState, LoginEffect>(
-      listener: (context, effect) => _handleEffects(context, effect),
+    return BlocFxListener<LoginBloc, LoginEvent, LoginUiState, LoginEffect>(
+      listener: (context, effect) => {
+        if (effect is ShowSuccessSnackbar)
+          {
+            // implement show snackbar
+          },
+        if (effect is ShowErrorDialog)
+          {
+            // implement show error dialog
+          },
+        if (effect is NavigateToDashboard)
+          {
+            // Implement navigation to Dashboard page here
+          },
+        if (effect is NavigateToRegister)
+          {
+            // Implement navigation to Register page here
+          },
+        if (effect is PlaySound)
+          {
+            // Implement play sound effect here
+          },
+      },
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Login'),
@@ -116,6 +138,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                     fullWidth: true,
                     isLoading: data.isLoading,
                     isEnabled: data.isFormValid,
+                    size: AppButtonSize.large,
                   );
                 },
               ),
@@ -133,6 +156,7 @@ class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
                               const OnNavigateToRegisterEvent(),
                             );
                           },
+                    size: AppButtonSize.large,
                     fullWidth: true,
                   );
                 },

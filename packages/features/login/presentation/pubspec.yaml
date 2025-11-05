@@ -42,6 +42,7 @@ dependencies:
     path: ../../../shared
   widgets:
     path: ../../../core/widgets
+  blocfx:
 
 dev_dependencies:
   flutter_test:

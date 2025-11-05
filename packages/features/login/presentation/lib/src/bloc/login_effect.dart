@@ -21,3 +21,7 @@ class NavigateToRegister extends LoginEffect {
 class NavigateToDashboard extends LoginEffect {
   const NavigateToDashboard();
 }
+
+class PlaySound extends LoginEffect {
+  const PlaySound();
+}
