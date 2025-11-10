@@ -34,6 +34,9 @@ workspace:
   - packages/features/register/data
   - packages/features/register/domain
   - packages/features/register/presentation
+  - packages/features/main/data
+  - packages/features/main/domain
+  - packages/features/main/presentation
   - packages/navigation
   - packages/shared
 
@@ -62,6 +65,8 @@ dependencies:
     path: packages/features/login/presentation
   register_presentation:
     path: packages/features/register/presentation
+  main_presentation:
+    path: packages/features/main/presentation
 
 dev_dependencies:
   flutter_test:
