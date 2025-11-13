@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  blocfx:
   navigation:
     path: ../../../navigation
   shared:

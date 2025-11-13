@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:main_presentation/main_presentation.dart';
 import 'package:navigation/app_navigator.dart';
 import 'package:login_presentation/login.dart';
+import 'package:profile_presentation/profile.dart';
 import 'package:register_presentation/register.dart';
 
 @Injectable(as: AppNavigator)
@@ -50,5 +51,10 @@ class AppNavigatorImpl implements AppNavigator {
   @override
   Future<void> navigateToMain() {
     return _appRouter.replace(const MainRoute());
+  }
+
+  @override
+  Future<void> navigateToProfile() async {
+    await _appRouter.push(const ProfileRoute());
   }
 }

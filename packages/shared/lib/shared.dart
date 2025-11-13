@@ -13,3 +13,4 @@ export 'src/bloc/base/base_event.dart';
 export 'src/bloc/base/base_state.dart';
 export 'src/bloc/base/base_effect.dart';
 export 'src/bloc/base/base_page_state.dart';
+export 'src/bloc/base/base_stateless.dart';
