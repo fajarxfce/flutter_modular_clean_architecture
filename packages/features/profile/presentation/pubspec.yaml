@@ -1,4 +1,4 @@
-name: home_presentation
+name: profile_presentation
 description: "A new Flutter module project."
 publish_to: none
 
@@ -6,21 +6,20 @@ version: 1.0.0+1
 
 environment:
   sdk: ^3.9.2
-
 resolution: workspace
 
 dependencies:
   flutter:
     sdk: flutter
 
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons:
+
   navigation:
     path: ../../../navigation
   shared:
     path: ../../../shared
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons:
 
 dev_dependencies:
   flutter_test:

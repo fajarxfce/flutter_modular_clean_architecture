@@ -1,5 +1,6 @@
 import 'package:flutter_modular_clean_architecture/router/app_router.dart';
 import 'package:injectable/injectable.dart';
+import 'package:main_presentation/main_presentation.dart';
 import 'package:navigation/app_navigator.dart';
 import 'package:login_presentation/login.dart';
 import 'package:register_presentation/register.dart';
@@ -44,5 +45,10 @@ class AppNavigatorImpl implements AppNavigator {
   @override
   Future<T?> navigateToAddProduct<T>() async {
     throw UnimplementedError('AddProductRoute not created yet');
+  }
+
+  @override
+  Future<void> navigateToMain() {
+    return _appRouter.replace(const MainRoute());
   }
 }

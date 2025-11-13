@@ -51,8 +51,8 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
     if (isSuccess) {
       emit(state.copyWith(status: LoginStatus.success));
 
-      emitEffect(const NavigateToDashboard());
       emitEffect(const ShowSuccessSnackbar('Login successful!'));
+      await _appNavigator.navigateToMain();
     } else {
       emit(state.copyWith(status: LoginStatus.initial));
 
