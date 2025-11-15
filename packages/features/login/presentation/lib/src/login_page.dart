@@ -8,228 +8,131 @@ import 'package:shared/shared.dart';
 import 'package:widgets/widgets.dart';
 
 @RoutePage()
-class LoginPage extends StatefulWidget {
+class LoginPage extends BaseStateless<LoginBloc> {
   final String? hello;
-  const LoginPage({super.key, @queryParam this.hello});
+  LoginPage({super.key, @queryParam this.hello});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends BasePageState<LoginPage, LoginBloc> {
   @override
   Widget buildPage(BuildContext context) {
-    return BlocFxListener<LoginBloc, LoginEvent, LoginUiState, LoginEffect>(
-      listener: (context, effect) => {
-        if (effect is ShowSuccessSnackbar)
-          {
-            // implement show snackbar
-          },
-        if (effect is ShowErrorDialog)
-          {
-            // implement show error dialog
-          },
-        if (effect is NavigateToDashboard)
-          {
-            // Implement navigation to Dashboard page here
-          },
-        if (effect is NavigateToRegister)
-          {
-            // Implement navigation to Register page here
-          },
-        if (effect is PlaySound)
-          {
-            // Implement play sound effect here
-          },
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Login'),
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (widget.hello != null) ...[
-                Text(
-                  widget.hello!,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 32),
-              ],
-
-              BlocSelector<
-                LoginBloc,
-                LoginUiState,
-                ({bool isLoading, String email})
-              >(
-                selector: (state) => (
-                  isLoading: state.status == LoginStatus.loading,
-                  email: state.email,
-                ),
-                builder: (context, data) {
-                  return TextField(
-                    onChanged: (value) {
-                      onEvent(OnEmailChangedEvent(value));
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.email),
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    enabled: !data.isLoading,
-                  );
-                },
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlocSelector<
+              LoginBloc,
+              LoginUiState,
+              ({bool isLoading, String email})
+            >(
+              selector: (state) => (
+                isLoading: state.status == LoginStatus.loading,
+                email: state.email,
               ),
-              const SizedBox(height: 16),
+              builder: (context, data) {
+                return AppTextField(
+                  label: 'Email',
+                  placeholder: 'Enter your email',
+                  errorText: data.email.isEmpty ? 'Email is required' : null,
+                  keyboardType: TextInputType.emailAddress,
+                  prefixIcon: Icon(Icons.email),
+                  onChanged: (value) =>
+                      context.read<LoginBloc>().add(OnEmailChangedEvent(value)),
+                );
+              },
+            ),
+            const SizedBox(height: 24),
 
-              BlocSelector<
-                LoginBloc,
-                LoginUiState,
-                ({bool isLoading, String password})
-              >(
-                selector: (state) => (
-                  isLoading: state.status == LoginStatus.loading,
-                  password: state.password,
-                ),
-                builder: (context, data) {
-                  return TextField(
-                    onChanged: (value) {
-                      context.read<LoginBloc>().add(
-                        OnPasswordChangedEvent(value),
-                      );
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.lock),
-                    ),
-                    obscureText: true,
-                    enabled: !data.isLoading,
-                  );
-                },
+            BlocSelector<
+              LoginBloc,
+              LoginUiState,
+              ({bool isLoading, String password})
+            >(
+              selector: (state) => (
+                isLoading: state.status == LoginStatus.loading,
+                password: state.password,
               ),
-              const SizedBox(height: 24),
+              builder: (context, data) {
+                return AppTextField(
+                  label: 'Password',
+                  placeholder: 'Enter your password',
+                  errorText: data.password.isEmpty
+                      ? 'Password is required'
+                      : null,
+                  keyboardType: TextInputType.visiblePassword,
+                  prefixIcon: Icon(Icons.password),
+                  onChanged: (value) => context.read<LoginBloc>().add(
+                    OnPasswordChangedEvent(value),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 24),
 
-              BlocSelector<
-                LoginBloc,
-                LoginUiState,
-                ({bool isFormValid, bool isLoading})
-              >(
-                selector: (state) => (
-                  isFormValid: state.isFormValid,
-                  isLoading: state.status == LoginStatus.loading,
-                ),
-                builder: (context, data) {
-                  return AppButton.primary(
-                    text: 'Sign In',
-                    onPressed: (!data.isFormValid)
-                        ? null
-                        : () {
-                            context.read<LoginBloc>().add(
-                              const OnLoginSubmittedEvent(),
-                            );
-                          },
-                    fullWidth: true,
-                    isLoading: data.isLoading,
-                    isEnabled: data.isFormValid,
-                    size: AppButtonSize.large,
-                  );
-                },
+            BlocSelector<
+              LoginBloc,
+              LoginUiState,
+              ({bool isFormValid, bool isLoading})
+            >(
+              selector: (state) => (
+                isFormValid: state.isFormValid,
+                isLoading: state.status == LoginStatus.loading,
               ),
-              const SizedBox(height: 16),
+              builder: (context, data) {
+                return AppButton.primary(
+                  text: 'Sign In',
+                  onPressed: (!data.isFormValid)
+                      ? null
+                      : () {
+                          context.read<LoginBloc>().add(
+                            const OnLoginSubmittedEvent(),
+                          );
+                        },
+                  fullWidth: true,
+                  isLoading: data.isLoading,
+                  isEnabled: data.isFormValid,
+                  size: AppButtonSize.large,
+                );
+              },
+            ),
+            const SizedBox(height: 16),
 
-              BlocSelector<LoginBloc, LoginUiState, bool>(
-                selector: (state) => state.status == LoginStatus.loading,
-                builder: (context, isLoading) {
-                  return AppButton.secondary(
-                    text: 'Go to Register',
+            BlocSelector<LoginBloc, LoginUiState, bool>(
+              selector: (state) => state.status == LoginStatus.loading,
+              builder: (context, isLoading) {
+                return AppButton.secondary(
+                  text: 'Go to Register',
+                  onPressed: isLoading
+                      ? null
+                      : () {
+                          context.read<LoginBloc>().add(
+                            const OnNavigateToRegisterEvent(),
+                          );
+                        },
+                  size: AppButtonSize.large,
+                  fullWidth: true,
+                );
+              },
+            ),
+            const SizedBox(height: 24),
+
+            BlocSelector<LoginBloc, LoginUiState, bool>(
+              selector: (state) => state.status == LoginStatus.loading,
+              builder: (context, isLoading) {
+                return Center(
+                  child: TextButton(
                     onPressed: isLoading
                         ? null
                         : () {
-                            context.read<LoginBloc>().add(
-                              const OnNavigateToRegisterEvent(),
-                            );
+                            // TODO: Implement forgot password
                           },
-                    size: AppButtonSize.large,
-                    fullWidth: true,
-                  );
-                },
-              ),
-              const SizedBox(height: 24),
-
-              BlocSelector<LoginBloc, LoginUiState, bool>(
-                selector: (state) => state.status == LoginStatus.loading,
-                builder: (context, isLoading) {
-                  return Center(
-                    child: TextButton(
-                      onPressed: isLoading
-                          ? null
-                          : () {
-                              // TODO: Implement forgot password
-                            },
-                      child: const Text('Forgot Password?'),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  // 🎯 Handle all side effects (single-shot events) in one place
-  void _handleEffects(BuildContext context, LoginEffect effect) {
-    // ✅ Navigate to Register
-    if (effect is NavigateToRegister) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Navigate to Register (implement with AppNavigator)'),
-        ),
-      );
-    }
-
-    // ✅ Navigate to Dashboard
-    if (effect is NavigateToDashboard) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Navigate to Dashboard (implement with AppNavigator)'),
-        ),
-      );
-    }
-
-    // ✅ Show Error Dialog
-    if (effect is ShowErrorDialog) {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: const Text('Login Failed'),
-          content: Text(effect.message),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
+                    child: const Text('Forgot Password?'),
+                  ),
+                );
+              },
             ),
           ],
-        ),
-      );
-    }
-
-    // ✅ Show Success Snackbar
-    if (effect is ShowSuccessSnackbar) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(effect.message),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-        ),
-      );
-    }
+        ).withPadding(all: 16),
+      ),
+    );
   }
 }

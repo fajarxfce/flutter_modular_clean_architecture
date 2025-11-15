@@ -1,36 +1,5 @@
 import 'package:flutter/material.dart';
-
-/// DigitalOcean-inspired color palette
-class AppColors {
-  // Primary - DigitalOcean Blue
-  static const Color primary = Color(0xFF0069FF);
-  static const Color primaryDark = Color(0xFF0050D4);
-  static const Color primaryLight = Color(0xFF338FFF);
-
-  // Secondary - Accent colors
-  static const Color success = Color(0xFF00C851);
-  static const Color warning = Color(0xFFFFBB33);
-  static const Color error = Color(0xFFFF3547);
-  static const Color info = Color(0xFF33B5E5);
-
-  // Neutrals
-  static const Color white = Color(0xFFFFFFFF);
-  static const Color gray50 = Color(0xFFF7FAFC);
-  static const Color gray100 = Color(0xFFEDF2F7);
-  static const Color gray200 = Color(0xFFE2E8F0);
-  static const Color gray300 = Color(0xFFCBD5E0);
-  static const Color gray400 = Color(0xFFA0AEC0);
-  static const Color gray500 = Color(0xFF718096);
-  static const Color gray600 = Color(0xFF4A5568);
-  static const Color gray700 = Color(0xFF2D3748);
-  static const Color gray800 = Color(0xFF1A202C);
-  static const Color gray900 = Color(0xFF171923);
-
-  // Text colors
-  static const Color textPrimary = gray900;
-  static const Color textSecondary = gray600;
-  static const Color textDisabled = gray400;
-}
+import 'package:widgets/src/app_colors.dart';
 
 /// Button size presets
 enum AppButtonSize {
@@ -201,13 +170,17 @@ class AppButton extends StatelessWidget {
         backgroundColor: isEnabled ? AppColors.primary : AppColors.gray300,
         foregroundColor: AppColors.white,
         disabledBackgroundColor: AppColors.gray300,
-        disabledForegroundColor: AppColors.textDisabled,
+        disabledForegroundColor: AppColors.textDisabled(context),
         elevation: 0,
         shadowColor: Colors.transparent,
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       ),
-      child: _buildButtonContent(fontSize: fontSize, color: AppColors.white),
+      child: _buildButtonContent(
+        context: context,
+        fontSize: fontSize,
+        color: AppColors.white,
+      ),
     );
   }
 
@@ -220,8 +193,10 @@ class AppButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: isEnabled ? onPressed : null,
       style: OutlinedButton.styleFrom(
-        foregroundColor: isEnabled ? AppColors.primary : AppColors.textDisabled,
-        disabledForegroundColor: AppColors.textDisabled,
+        foregroundColor: isEnabled
+            ? AppColors.primary
+            : AppColors.textDisabled(context),
+        disabledForegroundColor: AppColors.textDisabled(context),
         side: BorderSide(
           color: isEnabled ? AppColors.primary : AppColors.gray300,
           width: 1.5,
@@ -230,8 +205,9 @@ class AppButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       ),
       child: _buildButtonContent(
+        context: context,
         fontSize: fontSize,
-        color: isEnabled ? AppColors.primary : AppColors.textDisabled,
+        color: isEnabled ? AppColors.primary : AppColors.textDisabled(context),
       ),
     );
   }
@@ -248,13 +224,17 @@ class AppButton extends StatelessWidget {
         backgroundColor: isEnabled ? AppColors.error : AppColors.gray300,
         foregroundColor: AppColors.white,
         disabledBackgroundColor: AppColors.gray300,
-        disabledForegroundColor: AppColors.textDisabled,
+        disabledForegroundColor: AppColors.textDisabled(context),
         elevation: 0,
         shadowColor: Colors.transparent,
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       ),
-      child: _buildButtonContent(fontSize: fontSize, color: AppColors.white),
+      child: _buildButtonContent(
+        context: context,
+        fontSize: fontSize,
+        color: AppColors.white,
+      ),
     );
   }
 
@@ -267,14 +247,17 @@ class AppButton extends StatelessWidget {
     return TextButton(
       onPressed: isEnabled ? onPressed : null,
       style: TextButton.styleFrom(
-        foregroundColor: isEnabled ? AppColors.primary : AppColors.textDisabled,
-        disabledForegroundColor: AppColors.textDisabled,
+        foregroundColor: isEnabled
+            ? AppColors.primary
+            : AppColors.textDisabled(context),
+        disabledForegroundColor: AppColors.textDisabled(context),
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       ),
       child: _buildButtonContent(
+        context: context,
         fontSize: fontSize,
-        color: isEnabled ? AppColors.primary : AppColors.textDisabled,
+        color: isEnabled ? AppColors.primary : AppColors.textDisabled(context),
       ),
     );
   }
@@ -292,11 +275,13 @@ class AppButton extends StatelessWidget {
           text,
           style: TextStyle(
             fontSize: fontSize,
-            color: isEnabled ? AppColors.primary : AppColors.textDisabled,
+            color: isEnabled
+                ? AppColors.primary
+                : AppColors.textDisabled(context),
             decoration: TextDecoration.underline,
             decorationColor: isEnabled
                 ? AppColors.primary
-                : AppColors.textDisabled,
+                : AppColors.textDisabled(context),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -304,7 +289,11 @@ class AppButton extends StatelessWidget {
     );
   }
 
-  Widget _buildButtonContent({required double fontSize, required Color color}) {
+  Widget _buildButtonContent({
+    required BuildContext context,
+    required double fontSize,
+    required Color color,
+  }) {
     if (isLoading) {
       return SizedBox(
         width: fontSize,

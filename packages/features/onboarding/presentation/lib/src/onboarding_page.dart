@@ -26,9 +26,14 @@ class _OnBoardingPageContent extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Welcome to the OnBoarding Page!'),
-            OutlinedButton(
+            Text(
+              'Welcome to the OnBoarding Page!',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
               onPressed: () {
                 context.read<OnboardingBloc>().add(OnNavigateToLogin());
               },
