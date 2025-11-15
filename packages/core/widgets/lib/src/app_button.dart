@@ -174,7 +174,7 @@ class AppButton extends StatelessWidget {
         elevation: 0,
         shadowColor: Colors.transparent,
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: _buildButtonContent(
         context: context,
@@ -202,7 +202,7 @@ class AppButton extends StatelessWidget {
           width: 1.5,
         ),
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: _buildButtonContent(
         context: context,
@@ -228,7 +228,7 @@ class AppButton extends StatelessWidget {
         elevation: 0,
         shadowColor: Colors.transparent,
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: _buildButtonContent(
         context: context,
@@ -252,7 +252,7 @@ class AppButton extends StatelessWidget {
             : AppColors.textDisabled(context),
         disabledForegroundColor: AppColors.textDisabled(context),
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: _buildButtonContent(
         context: context,

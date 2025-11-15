@@ -248,8 +248,8 @@ class _AppTextFieldState extends State<AppTextField> {
     }
 
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(6),
-      borderSide: BorderSide(color: borderColor, width: isFocused ? 2 : 1),
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(color: borderColor, width: isFocused ? 1 : 1),
     );
   }
 
