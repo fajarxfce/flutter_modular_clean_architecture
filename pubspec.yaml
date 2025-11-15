@@ -61,6 +61,8 @@ dependencies:
   # local packages
   navigation:
     path: packages/navigation
+  network:
+    path: packages/core/network
   onboarding_presentation:
     path: packages/features/onboarding/presentation
   login_presentation:

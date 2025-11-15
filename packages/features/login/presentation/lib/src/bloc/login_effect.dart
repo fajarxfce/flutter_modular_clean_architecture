@@ -23,5 +23,6 @@ class NavigateToDashboard extends LoginEffect {
 }
 
 class PlaySound extends LoginEffect {
-  const PlaySound();
+  final String soundName;
+  const PlaySound(this.soundName);
 }

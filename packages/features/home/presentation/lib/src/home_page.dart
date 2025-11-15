@@ -1,11 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_presentation/src/bloc/home_bloc.dart';
+import 'package:home_presentation/src/bloc/home_effect.dart';
+import 'package:home_presentation/src/bloc/home_event.dart';
+import 'package:home_presentation/src/bloc/home_state.dart';
 import 'package:shared/shared.dart';
 
 @RoutePage()
-class HomePage extends BaseStateless<HomeBloc> {
+class HomePage
+    extends BaseStateless<HomeEvent, HomeState, HomeEffect, HomeBloc> {
   HomePage({super.key});
+
+  @override
+  void onEffect(BuildContext context, HomeEffect effect) {}
 
   @override
   Widget buildPage(BuildContext context) {

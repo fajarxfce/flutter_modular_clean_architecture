@@ -1,12 +1,23 @@
+import 'package:blocfx/blocfx.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared/shared.dart';
 
-abstract class BaseStateless<B extends BaseBloc>
-    extends BaseStatelessDelegate<B> {
+abstract class BaseStateless<
+  E extends BaseEvent,
+  S extends BaseState,
+  F extends BaseEffect,
+  B extends BaseBloc<E, S, F>
+>
+    extends BaseStatelessDelegate<E, S, F, B> {
   BaseStateless({super.key});
 }
 
-abstract class BaseStatelessDelegate<B extends BaseBloc>
+abstract class BaseStatelessDelegate<
+  E extends BaseEvent,
+  S extends BaseState,
+  F extends BaseEffect,
+  B extends BaseBloc<E, S, F>
+>
     extends StatelessWidget {
   late final B bloc = GetIt.instance<B>();
 
@@ -15,9 +26,15 @@ abstract class BaseStatelessDelegate<B extends BaseBloc>
   Widget build(BuildContext context) {
     return BlocProvider<B>(
       create: (context) => bloc,
-      child: Builder(builder: (context) => buildPage(context)),
+      child: BlocFxListener<B, E, S, F>(
+        bloc: bloc,
+        listener: onEffect,
+        child: buildPage(context),
+      ),
     );
   }
 
   Widget buildPage(BuildContext context);
+
+  void onEffect(BuildContext context, F effect) {}
 }

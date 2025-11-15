@@ -1,16 +1,26 @@
-import 'package:blocfx/blocfx.dart';
 import 'package:flutter/material.dart';
+import 'package:login_presentation/login.dart';
 import 'package:login_presentation/src/bloc/login_bloc.dart';
-import 'package:login_presentation/src/bloc/login_effect.dart';
 import 'package:login_presentation/src/bloc/login_state.dart';
 import 'package:login_presentation/src/bloc/login_event.dart';
 import 'package:shared/shared.dart';
 import 'package:widgets/widgets.dart';
 
 @RoutePage()
-class LoginPage extends BaseStateless<LoginBloc> {
+class LoginPage
+    extends BaseStateless<LoginEvent, LoginUiState, LoginEffect, LoginBloc> {
   final String? hello;
   LoginPage({super.key, @queryParam this.hello});
+
+  @override
+  void onEffect(BuildContext context, LoginEffect effect) {
+    super.onEffect(context, effect);
+    if (effect is PlaySound) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(effect.soundName)));
+    }
+  }
 
   @override
   Widget buildPage(BuildContext context) {
@@ -40,7 +50,7 @@ class LoginPage extends BaseStateless<LoginBloc> {
                 );
               },
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
 
             BlocSelector<
               LoginBloc,
