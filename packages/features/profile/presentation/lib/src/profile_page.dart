@@ -1,5 +1,8 @@
+import 'package:blocfx/blocfx.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:profile_presentation/src/cubit/profile_cubit.dart';
+import 'package:profile_presentation/src/cubit/profile_effect.dart';
+import 'package:profile_presentation/src/cubit/profile_state.dart';
 import 'package:shared/shared.dart';
 
 @RoutePage()
@@ -8,8 +11,42 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Center(child: Text('This is the Profile Page')),
+    return BlocProvider(
+      create: (_) => GetIt.instance<ProfileCubit>(),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            appBar: AppBar(title: const Text('Profile Page')),
+            body: CubitfxListener<ProfileCubit, ProfileState, ProfileEffect>(
+              listener: (context, effect) {
+                if (effect is ShowProfileDialog) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Profile Info'),
+                      content: Text(effect.message),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    context.read<ProfileCubit>().loadProfile();
+                  },
+                  child: const Text('Load Profile'),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

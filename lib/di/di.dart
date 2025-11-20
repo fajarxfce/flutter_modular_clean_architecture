@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:login_presentation/login.dart';
 import 'package:network/network.dart';
 import 'package:onboarding_presentation/di/injection.dart';
+import 'package:profile_presentation/profile.dart';
 
 final getIt = GetIt.instance;
 
@@ -23,6 +24,7 @@ Future<void> configureDependencies() async {
   configureOnboardingDependencies(getIt);
   configureLoginDependencies(getIt);
   configureHomeDependencies(getIt);
+  configureProfileDependencies(getIt);
 }
 
 @module

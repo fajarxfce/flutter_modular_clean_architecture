@@ -52,8 +52,8 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
       emit(state.copyWith(status: LoginStatus.success));
 
       emitEffect(const ShowSuccessSnackbar('Login successful!'));
-      emitEffect(const PlaySound('Playing peter pan sound'));
-      // await _appNavigator.navigateToMain();
+      // emitEffect(const PlaySound('Playing peter pan sound'));
+      await _appNavigator.navigateToMain();
     } else {
       emit(state.copyWith(status: LoginStatus.initial));
 

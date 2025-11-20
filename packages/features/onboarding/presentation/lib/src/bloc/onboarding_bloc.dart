@@ -12,10 +12,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingUiState> {
     on<OnNavigateToLogin>(_onNavigateToLogin);
   }
 
-  void _onNavigateToLogin(
+  Future<void> _onNavigateToLogin(
     OnNavigateToLogin event,
     Emitter<OnboardingUiState> emit,
-  ) {
-    _appNavigator.navigateToLogin('Hello from OnboardingBloc');
+  ) async {
+    await _appNavigator.navigateToLogin('Hello from OnboardingBloc');
   }
 }
