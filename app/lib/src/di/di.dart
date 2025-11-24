@@ -1,5 +1,5 @@
-import 'package:flutter_modular_clean_architecture/di/di.config.dart';
-import 'package:flutter_modular_clean_architecture/router/app_router.dart';
+import 'package:app/src/di/di.config.dart';
+import 'package:app/src/router/app_router.dart';
 import 'package:get_it/get_it.dart';
 import 'package:home_presentation/home.dart';
 import 'package:injectable/injectable.dart';

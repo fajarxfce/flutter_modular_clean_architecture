@@ -1,0 +1,45 @@
+name: app
+description: "A new Flutter package project."
+version: 1.0.0+1
+publish_to: none
+# homepage:
+
+environment:
+  sdk: ^3.9.2
+  flutter:
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons:
+  shared:
+    path: ../packages/shared
+  network:
+    path: ../packages/core/network
+  navigation:
+    path: ../packages/navigation
+
+  # local packages
+  onboarding_presentation:
+    path: ../packages/features/onboarding/presentation
+  login_presentation:
+    path: ../packages/features/login/presentation
+  register_presentation:
+    path: ../packages/features/register/presentation
+  main_presentation:
+    path: ../packages/features/main/presentation
+  home_presentation:
+    path: ../packages/features/home/presentation
+  profile_presentation:
+    path: ../packages/features/profile/presentation
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner:
+
+# The following section is specific to Flutter packages.
+flutter:

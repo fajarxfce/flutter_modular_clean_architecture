@@ -23,6 +23,7 @@ environment:
 
 # Pub workspaces - list all packages manually (globs not supported yet)
 workspace:
+  - app
   - packages/core/network
   - packages/core/widgets
   - packages/features/login/data

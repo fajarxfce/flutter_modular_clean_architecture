@@ -1,4 +1,4 @@
-import 'package:flutter_modular_clean_architecture/router/app_router.dart';
+import 'package:app/src/router/app_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:main_presentation/main_presentation.dart';
 import 'package:navigation/app_navigator.dart';

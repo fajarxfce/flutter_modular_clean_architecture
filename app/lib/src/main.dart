@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular_clean_architecture/di/di.dart';
-import 'package:flutter_modular_clean_architecture/router/app_router.dart';
-import 'package:flutter_modular_clean_architecture/ui/theme.dart';
+import 'package:app/src/di/di.dart';
+import 'package:app/src/router/app_router.dart';
+import 'package:app/src/ui/theme.dart';
 import 'package:network/network.dart';
 
 Future<void> main() async {
