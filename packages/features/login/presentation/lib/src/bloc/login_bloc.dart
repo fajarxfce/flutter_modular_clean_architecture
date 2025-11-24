@@ -2,6 +2,7 @@ import 'package:flutter/rendering.dart';
 import 'package:login_presentation/src/bloc/login_event.dart';
 import 'package:login_presentation/src/bloc/login_state.dart';
 import 'package:login_presentation/src/bloc/login_effect.dart';
+import 'package:widgets/formz.dart';
 import 'package:navigation/app_navigator.dart';
 import 'package:shared/shared.dart';
 
@@ -26,27 +27,36 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
     OnEmailChangedEvent event,
     Emitter<LoginUiState> emit,
   ) async {
+    final email = EmailInput.dirty(event.email);
     debugPrint('Email changed: ${state.isFormValid}');
-    emit(state.copyWith(email: event.email));
+    emit(state.copyWith(email: email));
   }
 
   Future<void> _onPasswordChanged(
     OnPasswordChangedEvent event,
     Emitter<LoginUiState> emit,
   ) async {
+    final password = PasswordInput.dirty(event.password);
     debugPrint('Password changed: ${state.isFormValid}');
-    emit(state.copyWith(password: event.password));
+    emit(state.copyWith(password: password));
   }
 
   Future<void> _onLoginSubmitted(
     OnLoginSubmittedEvent event,
     Emitter<LoginUiState> emit,
   ) async {
+    // Validate before proceeding
+    if (!state.isFormValid) {
+      emitEffect(const ShowErrorDialog('Please fix validation errors'));
+      return;
+    }
+
     emit(state.copyWith(status: LoginStatus.loading));
 
     await Future.delayed(const Duration(seconds: 2));
 
-    final isSuccess = state.email.isNotEmpty && state.password.isNotEmpty;
+    // Use formz validated values
+    final isSuccess = state.email.isValid && state.password.isValid;
 
     if (isSuccess) {
       emit(state.copyWith(status: LoginStatus.success));
@@ -57,7 +67,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
     } else {
       emit(state.copyWith(status: LoginStatus.initial));
 
-      emitEffect(const ShowErrorDialog('Please enter email and password'));
+      emitEffect(const ShowErrorDialog('Invalid email or password'));
     }
   }
 }

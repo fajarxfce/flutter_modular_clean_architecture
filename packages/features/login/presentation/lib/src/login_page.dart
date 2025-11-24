@@ -30,22 +30,15 @@ class LoginPage
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BlocSelector<
-              LoginBloc,
-              LoginUiState,
-              ({bool isLoading, String email})
-            >(
-              selector: (state) => (
-                isLoading: state.status == LoginStatus.loading,
-                email: state.email,
-              ),
-              builder: (context, data) {
+            BlocSelector<LoginBloc, LoginUiState, String?>(
+              selector: (state) => state.email.errorMessage,
+              builder: (context, errorText) {
                 return AppTextField(
                   label: 'Email',
                   placeholder: 'Enter your email',
-                  errorText: data.email.isEmpty ? 'Email is required' : null,
+                  errorText: errorText,
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon: Icon(Icons.email),
+                  prefixIcon: const Icon(Icons.email),
                   onChanged: (value) =>
                       context.read<LoginBloc>().add(OnEmailChangedEvent(value)),
                 );
@@ -53,24 +46,15 @@ class LoginPage
             ),
             const SizedBox(height: 16),
 
-            BlocSelector<
-              LoginBloc,
-              LoginUiState,
-              ({bool isLoading, String password})
-            >(
-              selector: (state) => (
-                isLoading: state.status == LoginStatus.loading,
-                password: state.password,
-              ),
-              builder: (context, data) {
+            BlocSelector<LoginBloc, LoginUiState, String?>(
+              selector: (state) => state.password.errorMessage,
+              builder: (context, errorText) {
                 return AppTextField(
                   label: 'Password',
                   placeholder: 'Enter your password',
-                  errorText: data.password.isEmpty
-                      ? 'Password is required'
-                      : null,
-                  keyboardType: TextInputType.visiblePassword,
-                  prefixIcon: Icon(Icons.password),
+                  errorText: errorText,
+                  obscureText: true,
+                  prefixIcon: const Icon(Icons.lock),
                   onChanged: (value) => context.read<LoginBloc>().add(
                     OnPasswordChangedEvent(value),
                   ),

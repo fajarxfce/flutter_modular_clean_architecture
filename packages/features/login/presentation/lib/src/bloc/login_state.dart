@@ -1,31 +1,29 @@
+import 'package:formz/formz.dart';
 import 'package:shared/shared.dart';
+import 'package:widgets/formz.dart';
 
 enum LoginStatus { initial, loading, success }
 
 class LoginUiState extends BaseState {
   final LoginStatus status;
-  final String email;
-  final String password;
+  final EmailInput email;
+  final PasswordInput password;
 
   const LoginUiState({
     required this.status,
-    this.email = '',
-    this.password = '',
+    this.email = const EmailInput.pure(),
+    this.password = const PasswordInput.pure(),
   });
 
   factory LoginUiState.initial() =>
       const LoginUiState(status: LoginStatus.initial);
 
-  bool get isEmailEmpty => email.isEmpty;
-
-  bool get isPasswordEmpty => password.isEmpty;
-
-  bool get isFormValid => email.isNotEmpty && password.isNotEmpty;
+  bool get isFormValid => Formz.validate([email, password]);
 
   LoginUiState copyWith({
     LoginStatus? status,
-    String? email,
-    String? password,
+    EmailInput? email,
+    PasswordInput? password,
   }) {
     return LoginUiState(
       status: status ?? this.status,

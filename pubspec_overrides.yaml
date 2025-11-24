@@ -13,6 +13,7 @@ dependency_overrides:
   # Utilities
   equatable: ^2.0.7
   cupertino_icons: ^1.0.8
+  formz: ^0.8.0
 
   # Dev dependencies
   build_runner: ^2.10.1
