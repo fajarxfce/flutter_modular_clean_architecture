@@ -19,8 +19,11 @@ dependency_overrides:
   build_runner: ^2.10.1
   injectable_generator: ^2.9.0
   auto_route_generator: ^10.2.5
+  retrofit_generator: ^10.2.0
   dartz: ^0.10.1
 
-  retrofit: ^4.9.0
+  retrofit: ^4.9.1
   logger: ^2.6.0
   json_annotation: ^4.9.0
+
+  dio: ^5.9.0
