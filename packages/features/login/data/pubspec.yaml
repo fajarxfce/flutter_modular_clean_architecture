@@ -16,7 +16,6 @@ description: "A new Flutter module project."
 # a `flutter run`. It has no impact on any other native host app that you embed
 # your Flutter project into.
 
-
 environment:
   sdk: ^3.9.2
 
@@ -25,6 +24,20 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
+  injectable:
+  dartz:
+
+  # HTTP & Serialization
+  dio:
+  retrofit:
+  json_annotation:
+  freezed_annotation:
+
+  # local packages
+  login_domain:
+    path: ../domain
+  network:
+    path: ../../../core/network
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -34,6 +47,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+
+  # Code Generation
+  build_runner:
+  injectable_generator:
+  retrofit_generator:
+  json_serializable:
+  freezed: ^3.2.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
