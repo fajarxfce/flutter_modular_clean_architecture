@@ -20,6 +20,34 @@ class LoginPage
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(effect.soundName)));
+    } else if (effect is ShowErrorDialog) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Login Error'),
+          content: Text(effect.message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else if (effect is ShowSuccessDialog) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Login Success'),
+          content: Text(effect.message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
     }
   }
 

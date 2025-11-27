@@ -16,21 +16,21 @@ class NetworkConfig {
 
   factory NetworkConfig.development() {
     return const NetworkConfig(
-      baseUrl: 'https://api.development.com',
+      baseUrl: 'http://192.168.0.165:8000/api',
       enableLogging: true,
     );
   }
 
   factory NetworkConfig.production() {
     return const NetworkConfig(
-      baseUrl: 'https://api.production.com',
+      baseUrl: 'http://192.168.0.165:8000/api',
       enableLogging: false,
     );
   }
 
   factory NetworkConfig.staging() {
     return const NetworkConfig(
-      baseUrl: 'https://api.staging.com',
+      baseUrl: 'http://192.168.0.165:8000/api',
       enableLogging: true,
     );
   }

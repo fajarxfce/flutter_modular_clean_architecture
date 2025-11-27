@@ -4,12 +4,11 @@ part 'api_response.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
 class ApiResponse<T> {
-  final bool success;
+  final int code;
   final String? message;
   final T? data;
-  final Map<String, dynamic>? errors;
 
-  ApiResponse({required this.success, this.message, this.data, this.errors});
+  ApiResponse({required this.code, this.message, this.data});
 
   factory ApiResponse.fromJson(
     Map<String, dynamic> json,
@@ -18,6 +17,12 @@ class ApiResponse<T> {
 
   Map<String, dynamic> toJson(Object Function(T value) toJsonT) =>
       _$ApiResponseToJson(this, toJsonT);
+}
+
+extension ApiResponseDataExtension<T> on ApiResponse<T> {
+  T? getModel() {
+    return data;
+  }
 }
 
 @JsonSerializable(genericArgumentFactories: true)

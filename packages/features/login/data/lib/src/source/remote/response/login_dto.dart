@@ -6,12 +6,10 @@ part 'login_dto.g.dart';
 @JsonSerializable()
 class LoginDTO {
   final String token;
-  @JsonKey(name: 'user_id')
-  final String? userId;
-  @JsonKey(name: 'refresh_token')
-  final String? refreshToken;
+  @JsonKey(name: 'tokenType')
+  final String? tokenType;
 
-  LoginDTO({required this.token, this.userId, this.refreshToken});
+  LoginDTO({required this.token, this.tokenType});
 
   factory LoginDTO.fromJson(Map<String, dynamic> json) =>
       _$LoginDTOFromJson(json);
@@ -19,6 +17,6 @@ class LoginDTO {
   Map<String, dynamic> toJson() => _$LoginDTOToJson(this);
 
   Login toDomain() {
-    return Login(token: token, userId: userId, refreshToken: refreshToken);
+    return Login(token: token, tokenType: tokenType);
   }
 }

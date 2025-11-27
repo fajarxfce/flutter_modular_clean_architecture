@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:login_data/src/source/remote/login_remote_datasource.dart';
 import 'package:login_domain/domain.dart';
-import 'package:login_data/src/source/remote/response/login_dto.dart';
 import 'package:network/network.dart';
 
 @Injectable(as: LoginRepository)
@@ -12,16 +11,14 @@ class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl(this._remoteDatasource);
 
   @override
-  Future<Either<Failure, Login>> login(String username, String password) async {
+  Future<Either<Failure, Login>> login(LoginRequest request) async {
     try {
-      final loginDTO = await _remoteDatasource.login(username, password);
+      final loginDTO = await _remoteDatasource.login(request);
       return Right(loginDTO.toDomain());
     } on DioException catch (e) {
-      return Left(
-        ServerFailure(message: e.message ?? 'Network error occurred'),
-      );
+      return Left(ServerFailure(e.message ?? 'Network error occurred'));
     } catch (e) {
-      return Left(ServerFailure(message: e.toString()));
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

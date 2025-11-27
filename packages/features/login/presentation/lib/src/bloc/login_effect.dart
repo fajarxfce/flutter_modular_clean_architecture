@@ -9,6 +9,11 @@ class ShowErrorDialog extends LoginEffect {
   const ShowErrorDialog(this.message);
 }
 
+class ShowSuccessDialog extends LoginEffect {
+  final String message;
+  const ShowSuccessDialog(this.message);
+}
+
 class ShowSuccessSnackbar extends LoginEffect {
   final String message;
   const ShowSuccessSnackbar(this.message);

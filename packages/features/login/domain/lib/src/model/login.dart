@@ -1,7 +1,6 @@
 class Login {
   final String token;
-  final String? userId;
-  final String? refreshToken;
+  final String? tokenType;
 
-  Login({required this.token, this.userId, this.refreshToken});
+  Login({required this.token, this.tokenType});
 }

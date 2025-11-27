@@ -28,6 +28,10 @@ dependencies:
     path: ../packages/features/onboarding/presentation
   login_presentation:
     path: ../packages/features/login/presentation
+  login_domain:
+    path: ../packages/features/login/domain
+  login_data:
+    path: ../packages/features/login/data
   register_presentation:
     path: ../packages/features/register/presentation
   main_presentation:

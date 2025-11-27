@@ -45,6 +45,9 @@ dependencies:
     path: ../../../core/widgets
   blocfx:
 
+  login_domain:
+    path: ../../../features/login/domain
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

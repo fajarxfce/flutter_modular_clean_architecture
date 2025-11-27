@@ -3,6 +3,8 @@ import 'package:app/src/router/app_router.dart';
 import 'package:get_it/get_it.dart';
 import 'package:home_presentation/home.dart';
 import 'package:injectable/injectable.dart';
+import 'package:login_data/data.dart';
+import 'package:login_domain/domain.dart';
 import 'package:login_presentation/login.dart';
 import 'package:network/network.dart';
 import 'package:onboarding_presentation/di/injection.dart';
@@ -25,6 +27,8 @@ Future<void> configureDependencies() async {
   configureLoginDependencies(getIt);
   configureHomeDependencies(getIt);
   configureProfileDependencies(getIt);
+  configureLoginDomainDependencies(getIt);
+  configureLoginDataDependencies(getIt);
 }
 
 @module

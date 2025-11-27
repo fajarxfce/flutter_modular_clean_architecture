@@ -1,4 +1,5 @@
 import 'package:flutter/rendering.dart';
+import 'package:login_domain/domain.dart';
 import 'package:login_presentation/src/bloc/login_event.dart';
 import 'package:login_presentation/src/bloc/login_state.dart';
 import 'package:login_presentation/src/bloc/login_effect.dart';
@@ -9,7 +10,10 @@ import 'package:shared/shared.dart';
 @injectable
 class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
   final AppNavigator _appNavigator;
-  LoginBloc(this._appNavigator) : super(LoginUiState.initial()) {
+  final LoginUsecase _loginUsecase;
+
+  LoginBloc(this._appNavigator, this._loginUsecase)
+    : super(LoginUiState.initial()) {
     on<OnNavigateToRegisterEvent>(_onNavigateToRegister);
     on<OnEmailChangedEvent>(_onEmailChanged);
     on<OnPasswordChangedEvent>(_onPasswordChanged);
@@ -45,7 +49,6 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
     OnLoginSubmittedEvent event,
     Emitter<LoginUiState> emit,
   ) async {
-    // Validate before proceeding
     if (!state.isFormValid) {
       emitEffect(const ShowErrorDialog('Please fix validation errors'));
       return;
@@ -53,21 +56,21 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
 
     emit(state.copyWith(status: LoginStatus.loading));
 
-    await Future.delayed(const Duration(seconds: 2));
+    final request = LoginRequest(
+      email: state.email.value,
+      password: state.password.value,
+    );
 
-    // Use formz validated values
-    final isSuccess = state.email.isValid && state.password.isValid;
-
-    if (isSuccess) {
-      emit(state.copyWith(status: LoginStatus.success));
-
-      emitEffect(const ShowSuccessSnackbar('Login successful!'));
-      // emitEffect(const PlaySound('Playing peter pan sound'));
-      await _appNavigator.navigateToMain();
-    } else {
-      emit(state.copyWith(status: LoginStatus.initial));
-
-      emitEffect(const ShowErrorDialog('Invalid email or password'));
-    }
+    final result = await _loginUsecase(request);
+    result.fold(
+      (failure) {
+        emit(state.copyWith(status: LoginStatus.initial));
+        emitEffect(ShowErrorDialog(failure.message));
+      },
+      (login) {
+        emit(state.copyWith(status: LoginStatus.success));
+        emitEffect(const ShowSuccessDialog('Login successful'));
+      },
+    );
   }
 }

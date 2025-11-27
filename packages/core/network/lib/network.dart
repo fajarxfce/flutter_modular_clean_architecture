@@ -10,7 +10,8 @@ export 'src/interceptors/error_interceptor.dart';
 
 export 'src/models/api_response.dart';
 
-export 'src/exceptions/network_exception.dart';
+export 'src/exceptions/failure.dart';
 
 export 'package:dio/dio.dart';
 export 'package:retrofit/retrofit.dart' hide Headers;
+export 'src/safe_api_call.dart';

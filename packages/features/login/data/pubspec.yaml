@@ -32,6 +32,7 @@ dependencies:
   retrofit:
   json_annotation:
   freezed_annotation:
+  get_it:
 
   # local packages
   login_domain:
