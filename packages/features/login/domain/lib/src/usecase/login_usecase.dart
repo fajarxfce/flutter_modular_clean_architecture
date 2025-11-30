@@ -8,7 +8,7 @@ class LoginUsecase {
   final LoginRepository _repository;
   LoginUsecase(this._repository);
 
-  Future<Either<Failure, Login>> call(LoginRequest request) {
+  Future<Either<Failure, Login?>> call(LoginRequest request) {
     if (request.email.isEmpty || request.password.isEmpty) {
       return Future.value(
         Left(ValidationFailure('Username and password must not be empty')),

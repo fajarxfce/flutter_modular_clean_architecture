@@ -3,5 +3,5 @@ import 'package:login_domain/domain.dart';
 import 'package:network/network.dart';
 
 abstract class LoginRemoteDatasource {
-  Future<LoginDTO> login(LoginRequest request);
+  Future<LoginDTO?> login(LoginRequest request);
 }

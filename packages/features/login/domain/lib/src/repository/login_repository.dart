@@ -4,5 +4,5 @@ import 'package:login_domain/src/usecase/login_request.dart';
 import 'package:network/network.dart';
 
 abstract class LoginRepository {
-  Future<Either<Failure, Login>> login(LoginRequest request);
+  Future<Either<Failure, Login?>> login(LoginRequest request);
 }

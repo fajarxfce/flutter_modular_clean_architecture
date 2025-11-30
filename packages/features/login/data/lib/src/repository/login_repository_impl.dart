@@ -11,10 +11,10 @@ class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl(this._remoteDatasource);
 
   @override
-  Future<Either<Failure, Login>> login(LoginRequest request) async {
+  Future<Either<Failure, Login?>> login(LoginRequest request) async {
     try {
       final loginDTO = await _remoteDatasource.login(request);
-      return Right(loginDTO.toDomain());
+      return Right(loginDTO?.toDomain());
     } on DioException catch (e) {
       return Left(ServerFailure(e.message ?? 'Network error occurred'));
     } catch (e) {

@@ -13,11 +13,11 @@ class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
   LoginRemoteDatasourceImpl(this._apiClient);
 
   @override
-  Future<LoginDTO> login(LoginRequest request) async {
+  Future<LoginDTO?> login(LoginRequest request) async {
     return SafeApiCall.execute(
       () async => (await _apiClient.login(
         LoginRequestDTO.fromDomain(request),
-      )).getModel()!,
+      )).getModel(),
     );
   }
 }

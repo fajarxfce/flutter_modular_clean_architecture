@@ -70,6 +70,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
       (login) {
         emit(state.copyWith(status: LoginStatus.success));
         emitEffect(const ShowSuccessDialog('Login successful'));
+        _appNavigator.navigateToMain();
       },
     );
   }
