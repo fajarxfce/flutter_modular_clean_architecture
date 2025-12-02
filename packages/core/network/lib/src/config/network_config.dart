@@ -16,21 +16,21 @@ class NetworkConfig {
 
   factory NetworkConfig.development() {
     return const NetworkConfig(
-      baseUrl: 'http://192.168.0.165:8000/api',
+      baseUrl: 'https://pos.karuhundeveloper.com/api',
       enableLogging: true,
     );
   }
 
   factory NetworkConfig.production() {
     return const NetworkConfig(
-      baseUrl: 'http://192.168.0.165:8000/api',
+      baseUrl: 'https://pos.karuhundeveloper.com/api',
       enableLogging: false,
     );
   }
 
   factory NetworkConfig.staging() {
     return const NetworkConfig(
-      baseUrl: 'http://192.168.0.165:8000/api',
+      baseUrl: 'https://pos.karuhundeveloper.com/api',
       enableLogging: true,
     );
   }
