@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:widgets/src/app_colors.dart';
 
 /// TextField size presets
 enum AppTextFieldSize {
@@ -107,7 +106,7 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final colorScheme = Theme.of(context).colorScheme;
     final hasError = widget.errorText != null;
 
     return Column(
@@ -120,7 +119,7 @@ class _AppTextFieldState extends State<AppTextField> {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary(context),
+              color: colorScheme.onSurface,
               letterSpacing: 0.2,
             ),
           ),
@@ -149,15 +148,15 @@ class _AppTextFieldState extends State<AppTextField> {
             style: TextStyle(
               fontSize: _getFontSize(),
               color: widget.enabled
-                  ? AppColors.textPrimary(context)
-                  : AppColors.textDisabled(context),
+                  ? colorScheme.onSurface
+                  : colorScheme.onSurfaceVariant.withOpacity(0.38),
               fontWeight: FontWeight.w400,
             ),
             decoration: InputDecoration(
               hintText: widget.placeholder,
               hintStyle: TextStyle(
                 fontSize: _getFontSize(),
-                color: AppColors.textDisabled(context),
+                color: colorScheme.onSurfaceVariant.withOpacity(0.6),
                 fontWeight: FontWeight.w400,
               ),
               prefixIcon: widget.prefixIcon,
@@ -166,7 +165,7 @@ class _AppTextFieldState extends State<AppTextField> {
               suffixText: widget.suffixText,
               filled: widget.variant == AppTextFieldVariant.filled,
               fillColor: widget.variant == AppTextFieldVariant.filled
-                  ? (isDark ? AppColors.dark100 : AppColors.gray50)
+                  ? colorScheme.surfaceContainerLow
                   : null,
               contentPadding: EdgeInsets.symmetric(
                 horizontal: _getHorizontalPadding(),
@@ -204,7 +203,7 @@ class _AppTextFieldState extends State<AppTextField> {
             widget.helperText!,
             style: TextStyle(
               fontSize: 12,
-              color: AppColors.textSecondary(context),
+              color: colorScheme.onSurfaceVariant,
               height: 1.4,
             ),
           ),
@@ -213,14 +212,14 @@ class _AppTextFieldState extends State<AppTextField> {
           const SizedBox(height: 4),
           Row(
             children: [
-              Icon(Icons.error_outline, size: 14, color: AppColors.error),
+              Icon(Icons.error_outline, size: 14, color: colorScheme.error),
               const SizedBox(width: 4),
               Expanded(
                 child: Text(
                   widget.errorText!,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: AppColors.error,
+                    color: colorScheme.error,
                     height: 1.4,
                   ),
                 ),
@@ -237,14 +236,15 @@ class _AppTextFieldState extends State<AppTextField> {
     required bool hasError,
     required bool isFocused,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     Color borderColor;
 
     if (hasError) {
-      borderColor = AppColors.error;
+      borderColor = colorScheme.error;
     } else if (isFocused) {
-      borderColor = AppColors.primary;
+      borderColor = colorScheme.primary;
     } else {
-      borderColor = AppColors.border(context);
+      borderColor = colorScheme.outline;
     }
 
     return OutlineInputBorder(
@@ -254,10 +254,11 @@ class _AppTextFieldState extends State<AppTextField> {
   }
 
   InputBorder _getDisabledBorder(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(6),
       borderSide: BorderSide(
-        color: AppColors.border(context).withOpacity(0.5),
+        color: colorScheme.outlineVariant.withOpacity(0.5),
         width: 1,
       ),
     );

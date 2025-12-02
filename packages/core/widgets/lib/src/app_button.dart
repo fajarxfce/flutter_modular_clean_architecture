@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:widgets/src/app_colors.dart';
 
 /// Button size presets
 enum AppButtonSize {
@@ -164,13 +163,16 @@ class AppButton extends StatelessWidget {
     required double horizontalPadding,
     required double fontSize,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ElevatedButton(
       onPressed: isEnabled ? onPressed : null,
       style: ElevatedButton.styleFrom(
-        backgroundColor: isEnabled ? AppColors.primary : AppColors.gray300,
-        foregroundColor: AppColors.white,
-        disabledBackgroundColor: AppColors.gray300,
-        disabledForegroundColor: AppColors.textDisabled(context),
+        backgroundColor: isEnabled
+            ? colorScheme.primary
+            : colorScheme.surfaceContainerHighest,
+        foregroundColor: colorScheme.onPrimary,
+        disabledBackgroundColor: colorScheme.surfaceContainerHighest,
+        disabledForegroundColor: colorScheme.onSurfaceVariant.withOpacity(0.38),
         elevation: 0,
         shadowColor: Colors.transparent,
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -179,7 +181,7 @@ class AppButton extends StatelessWidget {
       child: _buildButtonContent(
         context: context,
         fontSize: fontSize,
-        color: AppColors.white,
+        color: colorScheme.onPrimary,
       ),
     );
   }
@@ -190,15 +192,16 @@ class AppButton extends StatelessWidget {
     required double horizontalPadding,
     required double fontSize,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     return OutlinedButton(
       onPressed: isEnabled ? onPressed : null,
       style: OutlinedButton.styleFrom(
         foregroundColor: isEnabled
-            ? AppColors.primary
-            : AppColors.textDisabled(context),
-        disabledForegroundColor: AppColors.textDisabled(context),
+            ? colorScheme.primary
+            : colorScheme.onSurfaceVariant.withOpacity(0.38),
+        disabledForegroundColor: colorScheme.onSurfaceVariant.withOpacity(0.38),
         side: BorderSide(
-          color: isEnabled ? AppColors.primary : AppColors.gray300,
+          color: isEnabled ? colorScheme.outline : colorScheme.outlineVariant,
           width: 1.5,
         ),
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -207,7 +210,9 @@ class AppButton extends StatelessWidget {
       child: _buildButtonContent(
         context: context,
         fontSize: fontSize,
-        color: isEnabled ? AppColors.primary : AppColors.textDisabled(context),
+        color: isEnabled
+            ? colorScheme.primary
+            : colorScheme.onSurfaceVariant.withOpacity(0.38),
       ),
     );
   }
@@ -218,13 +223,16 @@ class AppButton extends StatelessWidget {
     required double horizontalPadding,
     required double fontSize,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     return ElevatedButton(
       onPressed: isEnabled ? onPressed : null,
       style: ElevatedButton.styleFrom(
-        backgroundColor: isEnabled ? AppColors.error : AppColors.gray300,
-        foregroundColor: AppColors.white,
-        disabledBackgroundColor: AppColors.gray300,
-        disabledForegroundColor: AppColors.textDisabled(context),
+        backgroundColor: isEnabled
+            ? colorScheme.error
+            : colorScheme.surfaceContainerHighest,
+        foregroundColor: colorScheme.onError,
+        disabledBackgroundColor: colorScheme.surfaceContainerHighest,
+        disabledForegroundColor: colorScheme.onSurfaceVariant.withOpacity(0.38),
         elevation: 0,
         shadowColor: Colors.transparent,
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -233,7 +241,7 @@ class AppButton extends StatelessWidget {
       child: _buildButtonContent(
         context: context,
         fontSize: fontSize,
-        color: AppColors.white,
+        color: colorScheme.onError,
       ),
     );
   }
@@ -244,20 +252,23 @@ class AppButton extends StatelessWidget {
     required double horizontalPadding,
     required double fontSize,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
     return TextButton(
       onPressed: isEnabled ? onPressed : null,
       style: TextButton.styleFrom(
         foregroundColor: isEnabled
-            ? AppColors.primary
-            : AppColors.textDisabled(context),
-        disabledForegroundColor: AppColors.textDisabled(context),
+            ? colorScheme.primary
+            : colorScheme.onSurfaceVariant.withOpacity(0.38),
+        disabledForegroundColor: colorScheme.onSurfaceVariant.withOpacity(0.38),
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: _buildButtonContent(
         context: context,
         fontSize: fontSize,
-        color: isEnabled ? AppColors.primary : AppColors.textDisabled(context),
+        color: isEnabled
+            ? colorScheme.primary
+            : colorScheme.onSurfaceVariant.withOpacity(0.38),
       ),
     );
   }
@@ -267,6 +278,10 @@ class AppButton extends StatelessWidget {
     required bool isEnabled,
     required double fontSize,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final color = isEnabled
+        ? colorScheme.primary
+        : colorScheme.onSurfaceVariant.withOpacity(0.38);
     return InkWell(
       onTap: isEnabled ? onPressed : null,
       child: Padding(
@@ -275,13 +290,9 @@ class AppButton extends StatelessWidget {
           text,
           style: TextStyle(
             fontSize: fontSize,
-            color: isEnabled
-                ? AppColors.primary
-                : AppColors.textDisabled(context),
+            color: color,
             decoration: TextDecoration.underline,
-            decorationColor: isEnabled
-                ? AppColors.primary
-                : AppColors.textDisabled(context),
+            decorationColor: color,
             fontWeight: FontWeight.w500,
           ),
         ),
