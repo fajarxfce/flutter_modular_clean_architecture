@@ -4,6 +4,7 @@ import 'package:profile_presentation/src/cubit/profile_cubit.dart';
 import 'package:profile_presentation/src/cubit/profile_effect.dart';
 import 'package:profile_presentation/src/cubit/profile_state.dart';
 import 'package:shared/shared.dart';
+import 'package:widgets/widgets.dart';
 
 @RoutePage()
 class ProfilePage extends StatelessWidget {
@@ -36,11 +37,11 @@ class ProfilePage extends StatelessWidget {
                 }
               },
               child: Center(
-                child: ElevatedButton(
+                child: AppButton.primary(
                   onPressed: () {
                     context.read<ProfileCubit>().loadProfile();
                   },
-                  child: const Text('Load Profile'),
+                  text: 'Load Profile',
                 ),
               ),
             ),

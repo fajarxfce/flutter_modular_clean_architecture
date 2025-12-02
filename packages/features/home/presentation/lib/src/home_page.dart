@@ -5,6 +5,7 @@ import 'package:home_presentation/src/bloc/home_effect.dart';
 import 'package:home_presentation/src/bloc/home_event.dart';
 import 'package:home_presentation/src/bloc/home_state.dart';
 import 'package:shared/shared.dart';
+import 'package:widgets/widgets.dart';
 
 @RoutePage()
 class HomePage
@@ -29,11 +30,11 @@ class HomePage
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             SizedBox(height: 20),
-            ElevatedButton(
+            AppButton.primary(
               onPressed: () {
                 context.tabsRouter.setActiveIndex(1);
               },
-              child: const Text('Go to Profile'),
+              text: 'Go to Profile Page',
             ),
           ],
         ),

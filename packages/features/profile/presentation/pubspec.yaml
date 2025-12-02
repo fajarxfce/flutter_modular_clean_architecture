@@ -23,6 +23,8 @@ dependencies:
     path: ../../../navigation
   shared:
     path: ../../../shared
+  widgets:
+    path: ../../../core/widgets
 
 dev_dependencies:
   flutter_test:

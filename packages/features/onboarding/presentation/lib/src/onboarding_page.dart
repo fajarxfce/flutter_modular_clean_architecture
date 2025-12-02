@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:onboarding_presentation/src/bloc/onboarding_bloc.dart';
 import 'package:onboarding_presentation/src/bloc/onboarding_event.dart';
+import 'package:widgets/widgets.dart';
 
 @RoutePage()
 class OnBoardingPage extends StatelessWidget {
@@ -33,11 +34,11 @@ class _OnBoardingPageContent extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
+            AppButton.primary(
               onPressed: () {
                 context.read<OnboardingBloc>().add(OnNavigateToLogin());
               },
-              child: const Text('Go to Login'),
+              text: 'Go to Login',
             ),
           ],
         ),

@@ -17,7 +17,6 @@ publish_to: none
 # a `flutter run`. It has no impact on any other native host app that you embed
 # your Flutter project into.
 
-
 environment:
   sdk: ^3.9.2
 
@@ -39,6 +38,8 @@ dependencies:
   # local
   navigation:
     path: ../../../navigation
+  widgets:
+    path: ../../../core/widgets
 
 dev_dependencies:
   flutter_test:
