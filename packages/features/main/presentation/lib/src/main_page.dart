@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:main_presentation/src/bloc/main_bloc.dart';
+import 'package:main_presentation/src/bloc/main_effect.dart';
+import 'package:main_presentation/src/bloc/main_event.dart';
+import 'package:main_presentation/src/bloc/main_state.dart';
 import 'package:shared/shared.dart';
 
 @RoutePage()
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class MainPage
+    extends BaseStateless<MainEvent, MainState, MainEffect, MainBloc> {
+  MainPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildPage(BuildContext context) {
     return AutoTabsScaffold(
       floatingActionButton: _buildFloatingActionButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -47,7 +52,7 @@ class MainPage extends StatelessWidget {
         ],
       ),
       child: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => bloc.add(OnNavigateToTransaction()),
         backgroundColor: Colors.transparent,
         elevation: 0,
         child: Icon(Icons.add, size: 32, color: colorScheme.onPrimary),

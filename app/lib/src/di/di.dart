@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:login_data/data.dart';
 import 'package:login_domain/domain.dart';
 import 'package:login_presentation/login.dart';
+import 'package:main_presentation/main_presentation.dart';
 import 'package:network/network.dart';
 import 'package:onboarding_presentation/di/injection.dart';
 import 'package:profile_presentation/profile.dart';
@@ -29,6 +30,7 @@ Future<void> configureDependencies() async {
   configureProfileDependencies(getIt);
   configureLoginDomainDependencies(getIt);
   configureLoginDataDependencies(getIt);
+  configureMainPresentationDependencies(getIt);
 }
 
 @module

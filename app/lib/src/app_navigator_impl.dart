@@ -51,7 +51,7 @@ class AppNavigatorImpl implements AppNavigator {
 
   @override
   Future<void> navigateToMain() {
-    return _appRouter.replace(const MainRoute());
+    return _appRouter.replace(MainRoute());
   }
 
   @override
