@@ -19,7 +19,10 @@ class HomePage
   Widget buildPage(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text(
+          'Home Page',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       ),
       body: Center(

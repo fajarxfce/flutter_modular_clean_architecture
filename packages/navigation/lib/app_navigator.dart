@@ -5,6 +5,7 @@ abstract class AppNavigator {
   Future<void> navigateToMain();
   Future<void> navigateToRegister();
   Future<void> navigateToProfile();
+  Future<void> navigateToTransaction();
 
   void navigateBack<T>([T? result]);
 

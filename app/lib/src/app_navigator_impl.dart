@@ -5,6 +5,7 @@ import 'package:navigation/app_navigator.dart';
 import 'package:login_presentation/login.dart';
 import 'package:profile_presentation/profile.dart';
 import 'package:register_presentation/register.dart';
+import 'package:transaction_presentation/transaction_presentation.dart';
 
 @Injectable(as: AppNavigator)
 class AppNavigatorImpl implements AppNavigator {
@@ -54,7 +55,9 @@ class AppNavigatorImpl implements AppNavigator {
   }
 
   @override
-  Future<void> navigateToProfile() async {
-    await _appRouter.push(const ProfileRoute());
-  }
+  Future<void> navigateToProfile() => _appRouter.push(const ProfileRoute());
+
+  @override
+  Future<void> navigateToTransaction() =>
+      _appRouter.push(const TransactionRoute());
 }

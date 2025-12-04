@@ -17,6 +17,14 @@ class PhoneInput extends BasePatternInput {
   String get invalidMessage => 'Please enter a valid phone number';
 }
 
+class TextInput extends BaseTextInput {
+  const TextInput.pure() : super.pure();
+  const TextInput.dirty([super.value = '']) : super.dirty();
+
+  @override
+  String get fieldName => 'Text';
+}
+
 /// Username input (3-20 chars, alphanumeric + underscore)
 class UsernameInput extends BasePatternInput {
   const UsernameInput.pure() : super.pure();

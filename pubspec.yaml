@@ -40,6 +40,7 @@ workspace:
   - packages/features/main/presentation
   - packages/features/home/presentation
   - packages/features/profile/presentation
+  - packages/features/transaction/presentation
   - packages/navigation
   - packages/shared
 
@@ -76,6 +77,8 @@ dependencies:
     path: packages/features/home/presentation
   profile_presentation:
     path: packages/features/profile/presentation
+  transaction_presentation:
+    path: packages/features/transaction/presentation
 
 dev_dependencies:
   flutter_test:
