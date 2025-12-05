@@ -3,7 +3,7 @@ library network;
 export 'src/config/network_config.dart';
 
 export 'src/di/network_module.dart';
-export 'src/di/network_setup.dart';
+export 'src/di/di.dart';
 
 export 'src/interceptors/auth_interceptor.dart';
 export 'src/interceptors/error_interceptor.dart';

@@ -1,7 +1,9 @@
 import 'package:database/src/datasource/secure_storage_datasource.dart';
 import 'package:database/src/repository/credential_repository.dart';
+import 'package:injectable/injectable.dart';
 
 /// Implementation of credential repository using secure storage
+@Injectable(as: CredentialRepository)
 class CredentialRepositoryImpl implements CredentialRepository {
   final SecureStorageDatasource _datasource;
 

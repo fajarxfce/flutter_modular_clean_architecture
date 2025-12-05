@@ -36,6 +36,7 @@ dev_dependencies:
 
   # Code Generation
   build_runner:
+  injectable_generator:
   retrofit_generator:
   json_serializable:
 

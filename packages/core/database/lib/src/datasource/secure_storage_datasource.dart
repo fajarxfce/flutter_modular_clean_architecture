@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:injectable/injectable.dart';
 
 /// Data source for secure storage operations
 abstract class SecureStorageDatasource {
@@ -9,6 +10,7 @@ abstract class SecureStorageDatasource {
 }
 
 /// Implementation using flutter_secure_storage
+@Injectable(as: SecureStorageDatasource)
 class SecureStorageDatasourceImpl implements SecureStorageDatasource {
   final FlutterSecureStorage _storage;
 

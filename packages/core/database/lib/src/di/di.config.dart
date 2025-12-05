@@ -15,6 +15,7 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../datasource/secure_storage_datasource.dart' as _i598;
 import '../repository/credential_repository.dart' as _i557;
+import '../repository/credential_repository_impl.dart' as _i965;
 import 'database_module.dart' as _i384;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -29,14 +30,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => databaseModule.secureStorage,
     );
     gh.factory<_i598.SecureStorageDatasource>(
-      () => databaseModule.secureStorageDatasource(
-        gh<_i558.FlutterSecureStorage>(),
-      ),
+      () => _i598.SecureStorageDatasourceImpl(gh<_i558.FlutterSecureStorage>()),
     );
     gh.factory<_i557.CredentialRepository>(
-      () => databaseModule.credentialRepository(
-        gh<_i598.SecureStorageDatasource>(),
-      ),
+      () => _i965.CredentialRepositoryImpl(gh<_i598.SecureStorageDatasource>()),
     );
     return this;
   }

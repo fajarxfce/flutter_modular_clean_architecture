@@ -22,9 +22,6 @@ final getIt = GetIt.instance;
 Future<void> configureDependencies() async {
   init(getIt);
 
-  // Network module - call setup dari network package (Kotlin style!)
-  setupNetworkModule(getIt);
-
   configureOnboardingDependencies(getIt);
   configureLoginDependencies(getIt);
   configureHomeDependencies(getIt);
@@ -33,6 +30,7 @@ Future<void> configureDependencies() async {
   configureLoginDataDependencies(getIt);
   configureMainPresentationDependencies(getIt);
   configureDatabaseDependencies(getIt);
+  configureNetworkDependencies(getIt);
 }
 
 @module
