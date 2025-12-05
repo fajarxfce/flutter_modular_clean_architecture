@@ -23,6 +23,9 @@ dependencies:
   navigation:
     path: ../packages/navigation
 
+  database:
+    path: ../packages/core/database
+
   # local packages
   onboarding_presentation:
     path: ../packages/features/onboarding/presentation

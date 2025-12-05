@@ -1,5 +1,6 @@
 import 'package:app/src/di/di.config.dart';
 import 'package:app/src/router/app_router.dart';
+import 'package:database/database.dart';
 import 'package:get_it/get_it.dart';
 import 'package:home_presentation/home.dart';
 import 'package:injectable/injectable.dart';
@@ -31,6 +32,7 @@ Future<void> configureDependencies() async {
   configureLoginDomainDependencies(getIt);
   configureLoginDataDependencies(getIt);
   configureMainPresentationDependencies(getIt);
+  configureDatabaseDependencies(getIt);
 }
 
 @module
