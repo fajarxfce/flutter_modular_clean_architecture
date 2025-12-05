@@ -11,7 +11,11 @@ abstract class NetworkModule {
   NetworkConfig get networkConfig => NetworkConfig.development();
 
   @lazySingleton
-  Dio dio(NetworkConfig config) {
+  Dio dio(
+    NetworkConfig config,
+    AuthInterceptor authInterceptor,
+    ErrorInterceptor errorInterceptor,
+  ) {
     final dio = Dio(
       BaseOptions(
         baseUrl: config.baseUrl,
@@ -39,9 +43,9 @@ abstract class NetworkModule {
       );
     }
 
-    dio.interceptors.add(AuthInterceptor());
+    dio.interceptors.add(authInterceptor);
 
-    dio.interceptors.add(ErrorInterceptor());
+    dio.interceptors.add(errorInterceptor);
 
     return dio;
   }

@@ -22,6 +22,9 @@ dependencies:
   get_it:
   injectable:
 
+  database:
+    path: ../database
+
   # Utils
   logger:
   dartz:

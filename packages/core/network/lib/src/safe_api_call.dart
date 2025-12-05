@@ -1,25 +1,27 @@
 import 'dart:developer';
 
+import 'package:dartz/dartz.dart';
 import 'package:network/network.dart';
 
 class SafeApiCall {
-  static Future<T> execute<T>(
+  static Future<Either<Failure, T>> execute<T>(
     Future<T> Function() apiCall, {
     String? errorMessage,
     String? logName,
   }) async {
     try {
       final result = await apiCall();
-      return result;
+      return Right(result);
     } on DioException catch (e) {
       final logContext = logName ?? 'SafeApiCall';
       log('DioException in $logContext: ${e.toString()}');
-      throw _handleDioException(e);
+      final failure = _handleDioException(e);
+      return Left(failure);
     } catch (e) {
       final logContext = logName ?? 'SafeApiCall';
       log('Unexpected error in $logContext: ${e.toString()}');
       final message = errorMessage ?? "An unexpected error occurred: $e";
-      throw ServerFailure(message);
+      return Left(ServerFailure(message));
     }
   }
 

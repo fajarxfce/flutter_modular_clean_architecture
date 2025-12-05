@@ -11,6 +11,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:navigation/app_navigator.dart' as _i631;
+
+import '../app_navigator_impl.dart' as _i563;
+import '../router/app_router.dart' as _i81;
+import 'di.dart' as _i913;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 _i174.GetIt init(
@@ -18,6 +23,14 @@ _i174.GetIt init(
   String? environment,
   _i526.EnvironmentFilter? environmentFilter,
 }) {
-  _i526.GetItHelper(getIt, environment, environmentFilter);
+  final gh = _i526.GetItHelper(getIt, environment, environmentFilter);
+  final registerModule = _$RegisterModule();
+  gh.singleton<_i174.GetIt>(() => registerModule.getIt);
+  gh.singleton<_i81.AppRouter>(() => registerModule.appRouter);
+  gh.factory<_i631.AppNavigator>(
+    () => _i563.AppNavigatorImpl(gh<_i81.AppRouter>()),
+  );
   return getIt;
 }
+
+class _$RegisterModule extends _i913.RegisterModule {}

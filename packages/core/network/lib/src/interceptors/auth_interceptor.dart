@@ -1,25 +1,40 @@
+import 'package:database/database.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class AuthInterceptor extends Interceptor {
-  String? _token;
+  final CredentialRepository _credentialRepository;
 
-  AuthInterceptor({String? token}) : _token = token;
-
-  void updateToken(String? token) {
-    _token = token;
-  }
+  AuthInterceptor(this._credentialRepository);
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    if (_token != null && _token!.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $_token';
+  Future<void> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final token = await _credentialRepository.getAccessToken();
+
+    if (token != null && token.isNotEmpty) {
+      options.headers['X-API-KEY'] = token;
     }
+
     handler.next(options);
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == 401) {}
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
+    if (err.response?.statusCode == 401) {
+      final refreshToken = await _credentialRepository.getRefreshToken();
+
+      if (refreshToken != null && refreshToken.isNotEmpty) {}
+
+      await _credentialRepository.clearTokens();
+    }
+
     handler.next(err);
   }
 }

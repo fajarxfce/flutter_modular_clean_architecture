@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:network/network.dart';
 import 'package:network/src/config/network_config.dart';
 import 'package:network/src/di/network_module.dart';
 
@@ -9,7 +10,11 @@ void setupNetworkModule(GetIt getIt) {
   getIt.registerLazySingleton<NetworkConfig>(() => networkModule.networkConfig);
 
   getIt.registerLazySingleton<Dio>(
-    () => networkModule.dio(getIt<NetworkConfig>()),
+    () => networkModule.dio(
+      getIt<NetworkConfig>(),
+      getIt<AuthInterceptor>(),
+      getIt<ErrorInterceptor>(),
+    ),
   );
 }
 

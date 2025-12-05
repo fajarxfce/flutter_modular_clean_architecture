@@ -4,7 +4,6 @@ import 'package:login_data/src/source/remote/login_remote_datasource.dart';
 import 'package:login_data/src/source/remote/request/login_request_dto.dart';
 import 'package:login_data/src/source/remote/response/login_dto.dart';
 import 'package:login_domain/domain.dart';
-import 'package:network/network.dart';
 
 @Injectable(as: LoginRemoteDatasource)
 class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
@@ -14,10 +13,8 @@ class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
 
   @override
   Future<LoginDTO?> login(LoginRequest request) async {
-    return SafeApiCall.execute(
-      () async => (await _apiClient.login(
-        LoginRequestDTO.fromDomain(request),
-      )).getModel(),
-    );
+    return await _apiClient
+        .login(LoginRequestDTO.fromDomain(request))
+        .then((response) => response.data);
   }
 }
