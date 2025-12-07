@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:splash_presentation/src/di/injection.config.dart';
+import 'package:splash_presentation/src/di/di.config.dart';
 
 @InjectableInit(
   initializerName: 'initSplash',

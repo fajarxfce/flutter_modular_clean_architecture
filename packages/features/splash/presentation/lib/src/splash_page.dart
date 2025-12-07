@@ -22,7 +22,6 @@ class SplashPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo atau branding lu
                 Icon(
                   Icons.flutter_dash,
                   size: 100,
