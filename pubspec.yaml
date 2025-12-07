@@ -42,6 +42,7 @@ workspace:
   - packages/features/home/presentation
   - packages/features/profile/presentation
   - packages/features/transaction/presentation
+  - packages/features/splash/presentation
   - packages/navigation
   - packages/shared
 

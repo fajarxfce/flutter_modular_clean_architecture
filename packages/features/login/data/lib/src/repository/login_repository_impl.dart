@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:database/database.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:login_data/src/source/remote/login_remote_datasource.dart';
 import 'package:login_domain/domain.dart';
@@ -15,13 +14,10 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<Either<Failure, Login?>> login(LoginRequest request) async {
-    final existingToken = await _credentialRepository.getAccessToken();
-    debugPrint('Existing Token: $existingToken');
     return SafeApiCall.execute(() async {
       final loginDto = await _remoteDatasource.login(request);
       if (loginDto != null) {
         await _credentialRepository.saveAccessToken(loginDto.token);
-        await _credentialRepository.saveRefreshToken(loginDto.token);
         return loginDto.toDomain();
       }
       return null;

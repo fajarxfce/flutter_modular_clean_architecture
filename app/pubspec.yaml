@@ -45,6 +45,8 @@ dependencies:
     path: ../packages/features/profile/presentation
   transaction_presentation:
     path: ../packages/features/transaction/presentation
+  splash_presentation:
+    path: ../packages/features/splash/presentation
 
 dev_dependencies:
   flutter_test:

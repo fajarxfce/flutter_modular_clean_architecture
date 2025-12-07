@@ -11,6 +11,7 @@ import 'package:main_presentation/main_presentation.dart';
 import 'package:network/network.dart';
 import 'package:onboarding_presentation/di/injection.dart';
 import 'package:profile_presentation/profile.dart';
+import 'package:splash_presentation/splash_presentation.dart';
 
 final getIt = GetIt.instance;
 
@@ -19,9 +20,15 @@ final getIt = GetIt.instance;
   preferRelativeImports: true,
   asExtension: false,
 )
-Future<void> configureDependencies() async {
+void configureDependencies() {
   init(getIt);
 
+  // Database & Network - register first
+  configureDatabaseDependencies(getIt);
+  configureNetworkDependencies(getIt);
+
+  // Features
+  configureSplashDependencies(getIt);
   configureOnboardingDependencies(getIt);
   configureLoginDependencies(getIt);
   configureHomeDependencies(getIt);
@@ -29,8 +36,6 @@ Future<void> configureDependencies() async {
   configureLoginDomainDependencies(getIt);
   configureLoginDataDependencies(getIt);
   configureMainPresentationDependencies(getIt);
-  configureDatabaseDependencies(getIt);
-  configureNetworkDependencies(getIt);
 }
 
 @module

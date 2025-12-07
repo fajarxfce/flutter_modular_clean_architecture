@@ -1,4 +1,4 @@
-name: login_presentation
+name: splash_presentation
 description: "A new Flutter module project."
 publish_to: none
 
@@ -28,6 +28,8 @@ dependencies:
     path: ../../../shared
   widgets:
     path: ../../../core/widgets
+  database:
+    path: ../../../core/database
   blocfx:
 
   login_domain:
