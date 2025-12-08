@@ -7,6 +7,9 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Product Page')),
+      body: const Center(child: Text('This is the Product Page')),
+    );
   }
 }

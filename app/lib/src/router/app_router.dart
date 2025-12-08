@@ -3,6 +3,7 @@ import 'package:home_presentation/home.dart';
 import 'package:login_presentation/login.dart';
 import 'package:main_presentation/main_presentation.dart';
 import 'package:onboarding_presentation/onboarding.dart';
+import 'package:product_presentation/product_presentation.dart';
 import 'package:profile_presentation/profile.dart';
 import 'package:register_presentation/register.dart';
 import 'package:splash_presentation/splash_presentation.dart';
@@ -24,5 +25,6 @@ class AppRouter extends RootStackRouter {
       ],
     ),
     AutoRoute(page: TransactionRoute.page),
+    AutoRoute(page: ProductRoute.page),
   ];
 }
