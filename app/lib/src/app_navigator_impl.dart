@@ -64,6 +64,6 @@ class AppNavigatorImpl implements AppNavigator {
 
   @override
   Future<void> navigateToProduct() async {
-    await _appRouter.push(const ProductRoute());
+    await _appRouter.push(ProductRoute());
   }
 }

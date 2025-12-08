@@ -12,6 +12,7 @@ import 'package:network/network.dart';
 import 'package:onboarding_presentation/di/injection.dart';
 import 'package:product_data/product_data.dart';
 import 'package:product_domain/product_domain.dart';
+import 'package:product_presentation/product_presentation.dart';
 import 'package:profile_presentation/profile.dart';
 import 'package:splash_presentation/splash_presentation.dart';
 
@@ -40,6 +41,7 @@ void configureDependencies() {
   configureMainPresentationDependencies(getIt);
   configureProductDomainDependencies(getIt);
   configureProductDataDependencies(getIt);
+  configureProductPresentationDependencies(getIt);
 }
 
 @module
