@@ -7,3 +7,7 @@ abstract class HomeEvent extends BaseEvent {
 class OnButtonClickedEvent extends HomeEvent {
   const OnButtonClickedEvent();
 }
+
+class OnNavigateToProduct extends HomeEvent {
+  const OnNavigateToProduct();
+}

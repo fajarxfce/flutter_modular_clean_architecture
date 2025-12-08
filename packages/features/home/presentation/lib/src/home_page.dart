@@ -125,7 +125,7 @@ class HomePage
                     title: 'Kelola Produk',
                     subtitle: 'Atur produk Anda',
                     onTap: () {
-                      // TODO: Navigate to product page
+                      bloc.add(const OnNavigateToProduct());
                     },
                     backgroundColor: colorScheme.onPrimary,
                     iconColor: colorScheme.primary,

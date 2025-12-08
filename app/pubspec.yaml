@@ -47,6 +47,12 @@ dependencies:
     path: ../packages/features/transaction/presentation
   splash_presentation:
     path: ../packages/features/splash/presentation
+  product_presentation:
+    path: ../packages/features/product/presentation
+  product_domain:
+    path: ../packages/features/product/domain
+  product_data:
+    path: ../packages/features/product/data
 
 dev_dependencies:
   flutter_test:

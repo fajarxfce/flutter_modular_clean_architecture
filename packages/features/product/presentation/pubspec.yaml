@@ -1,0 +1,55 @@
+name: product_presentation
+description: "A new Flutter module project."
+publish_to: none
+
+environment:
+  sdk: ^3.9.2
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Managed by pubspec_overrides.yaml (no version needed)
+  auto_route:
+  flutter_bloc:
+  get_it:
+  injectable:
+  formz:
+  freezed_annotation:
+
+  equatable:
+  cupertino_icons:
+
+  # Local packages
+  navigation:
+    path: ../../../navigation
+  shared:
+    path: ../../../shared
+  widgets:
+    path: ../../../core/widgets
+  database:
+    path: ../../../core/database
+  blocfx:
+
+  product_domain:
+    path: ../../../features/product/domain
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+  # Managed by pubspec_overrides.yaml (no version needed)
+  build_runner:
+  auto_route_generator:
+  injectable_generator:
+  freezed:
+
+flutter:
+  uses-material-design: true
+  module:
+    androidX: true
+    androidPackage: com.example.presentation
+    iosBundleIdentifier: com.example.presentation

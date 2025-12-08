@@ -24,6 +24,8 @@ environment:
 # Pub workspaces - list all packages manually (globs not supported yet)
 workspace:
   - app
+  - packages/navigation
+  - packages/shared
   - packages/core/network
   - packages/core/widgets
   - packages/core/database
@@ -43,8 +45,9 @@ workspace:
   - packages/features/profile/presentation
   - packages/features/transaction/presentation
   - packages/features/splash/presentation
-  - packages/navigation
-  - packages/shared
+  - packages/features/product/presentation
+  - packages/features/product/domain
+  - packages/features/product/data
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
