@@ -1,4 +1,5 @@
 import 'package:database/database.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:navigation/app_navigator.dart';
@@ -19,11 +20,12 @@ class SplashCubit extends Cubit<SplashState> {
     await Future.delayed(const Duration(milliseconds: 1500));
 
     final token = await _credentialRepository.getAccessToken();
+    debugPrint('SplashCubit - Access Token: $token');
 
     if (token != null && token.isNotEmpty) {
-      _appNavigator.navigateToMain();
+      await _appNavigator.navigateToMain();
     } else {
-      _appNavigator.navigateToOnboarding();
+      await _appNavigator.navigateToOnboarding();
     }
   }
 }

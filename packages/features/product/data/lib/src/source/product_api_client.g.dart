@@ -30,7 +30,7 @@ class _ProductApiClient implements ProductApiClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/product',
+            '/v1/product',
             queryParameters: queryParameters,
             data: _data,
           )

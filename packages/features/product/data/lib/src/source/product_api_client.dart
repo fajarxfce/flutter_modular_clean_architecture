@@ -9,7 +9,7 @@ part 'product_api_client.g.dart';
 abstract class ProductApiClient {
   factory ProductApiClient(Dio dio, {String? baseUrl}) = _ProductApiClient;
 
-  @GET('/product')
+  @GET('/v1/product')
   Future<List<ProductDTO>> fetchProducts(
     @Queries() Map<String, dynamic> queries,
   );

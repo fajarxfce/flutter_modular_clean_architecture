@@ -1,5 +1,6 @@
 import 'package:database/database.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -14,9 +15,10 @@ class AuthInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     final token = await _credentialRepository.getAccessToken();
+    debugPrint('AuthInterceptor - Access Token: $token');
 
     if (token != null && token.isNotEmpty) {
-      options.headers['X-API-KEY'] = token;
+      options.headers['Authorization'] = 'Bearer $token';
     }
 
     handler.next(options);

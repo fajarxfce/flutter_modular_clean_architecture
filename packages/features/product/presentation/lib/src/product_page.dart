@@ -18,6 +18,7 @@ class ProductPage
 
   @override
   Widget buildPage(BuildContext context) {
+    bloc.add(LoadProductsEvent());
     return Scaffold(
       appBar: AppBar(title: const Text('Product Page')),
       body: const Center(child: Text('This is the Product sss')),
