@@ -32,6 +32,8 @@ dependencies:
 
   login_domain:
     path: ../../../features/login/domain
+  analytics:
+    path: ../../../core/analytics
 
 dev_dependencies:
   flutter_test:

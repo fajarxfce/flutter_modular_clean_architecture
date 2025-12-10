@@ -134,7 +134,9 @@ class HomePage
                     icon: Icons.receipt_long_rounded,
                     title: 'Transaksi',
                     subtitle: 'Catat transaksi',
-                    onTap: () {},
+                    onTap: () {
+                      throw Exception('Test Crashlytics Exception');
+                    },
                     backgroundColor: colorScheme.onPrimary,
                     iconColor: Colors.blue.shade700,
                   ),

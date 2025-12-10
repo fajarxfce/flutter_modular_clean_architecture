@@ -1,0 +1,21 @@
+name: analytics
+description: Core analytics and crashlytics service abstraction
+publish_to: none
+
+environment:
+  sdk: ^3.9.2
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  injectable:
+  get_it:
+  firebase_core:
+  firebase_analytics:
+  firebase_crashlytics:
+
+dev_dependencies:
+  build_runner:
+  injectable_generator:

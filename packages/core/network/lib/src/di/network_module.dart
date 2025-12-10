@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:network/src/config/network_config.dart';
 import 'package:network/src/interceptors/auth_interceptor.dart';
+import 'package:network/src/interceptors/crashlytics_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 @module
@@ -10,7 +11,11 @@ abstract class NetworkModule {
   NetworkConfig get networkConfig => NetworkConfig.development();
 
   @lazySingleton
-  Dio dio(NetworkConfig config, AuthInterceptor authInterceptor) {
+  Dio dio(
+    NetworkConfig config,
+    AuthInterceptor authInterceptor,
+    CrashlyticsInterceptor crashlyticsInterceptor,
+  ) {
     final dio = Dio(
       BaseOptions(
         baseUrl: config.baseUrl,
@@ -39,6 +44,7 @@ abstract class NetworkModule {
     }
 
     dio.interceptors.add(authInterceptor);
+    dio.interceptors.add(crashlyticsInterceptor);
 
     return dio;
   }

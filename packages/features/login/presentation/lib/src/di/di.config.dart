@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:analytics/analytics.dart' as _i548;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:login_domain/domain.dart' as _i812;
@@ -24,7 +25,11 @@ _i174.GetIt init(
 }) {
   final gh = _i526.GetItHelper(getIt, environment, environmentFilter);
   gh.factory<_i221.LoginBloc>(
-    () => _i221.LoginBloc(gh<_i631.AppNavigator>(), gh<_i812.LoginUsecase>()),
+    () => _i221.LoginBloc(
+      gh<_i631.AppNavigator>(),
+      gh<_i812.LoginUsecase>(),
+      gh<_i548.FirebaseService>(),
+    ),
   );
   return getIt;
 }

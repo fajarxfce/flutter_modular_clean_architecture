@@ -15,6 +15,7 @@ import 'package:navigation/app_navigator.dart' as _i631;
 
 import '../app_navigator_impl.dart' as _i563;
 import '../router/app_router.dart' as _i81;
+import '../services/firebase_service.dart' as _i758;
 import 'di.dart' as _i913;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -27,6 +28,7 @@ _i174.GetIt init(
   final registerModule = _$RegisterModule();
   gh.singleton<_i174.GetIt>(() => registerModule.getIt);
   gh.singleton<_i81.AppRouter>(() => registerModule.appRouter);
+  gh.lazySingleton<_i758.FirebaseService>(() => _i758.FirebaseService());
   gh.factory<_i631.AppNavigator>(
     () => _i563.AppNavigatorImpl(gh<_i81.AppRouter>()),
   );

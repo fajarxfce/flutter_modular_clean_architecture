@@ -1,3 +1,4 @@
+import 'package:analytics/analytics.dart';
 import 'package:flutter/rendering.dart';
 import 'package:login_domain/domain.dart';
 import 'package:login_presentation/src/bloc/login_event.dart';
@@ -11,8 +12,9 @@ import 'package:shared/shared.dart';
 class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
   final AppNavigator _appNavigator;
   final LoginUsecase _loginUsecase;
+  final FirebaseService _firebaseService;
 
-  LoginBloc(this._appNavigator, this._loginUsecase)
+  LoginBloc(this._appNavigator, this._loginUsecase, this._firebaseService)
     : super(LoginUiState.initial()) {
     on<OnNavigateToRegisterEvent>(_onNavigateToRegister);
     on<OnEmailChangedEvent>(_onEmailChanged);
@@ -66,6 +68,7 @@ class LoginBloc extends BaseBloc<LoginEvent, LoginUiState, LoginEffect> {
       (failure) {
         emit(state.copyWith(status: LoginStatus.initial));
         emitEffect(ShowErrorDialog(failure.message));
+        _firebaseService.logLogin(method: 'halo from invalid login');
       },
       (login) {
         emit(state.copyWith(status: LoginStatus.success));

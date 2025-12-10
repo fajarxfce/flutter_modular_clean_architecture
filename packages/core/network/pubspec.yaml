@@ -29,6 +29,10 @@ dependencies:
   logger:
   dartz:
 
+  # analytics
+  analytics:
+    path: ../analytics
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

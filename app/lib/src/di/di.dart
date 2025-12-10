@@ -1,5 +1,6 @@
 import 'package:app/src/di/di.config.dart';
 import 'package:app/src/router/app_router.dart';
+import 'package:analytics/analytics.dart';
 import 'package:database/database.dart';
 import 'package:get_it/get_it.dart';
 import 'package:home_presentation/home.dart';
@@ -26,9 +27,10 @@ final getIt = GetIt.instance;
 void configureDependencies() {
   init(getIt);
 
-  // Database & Network - register first
+  // Core - register first
   configureDatabaseDependencies(getIt);
   configureNetworkDependencies(getIt);
+  configureAnalyticsDependencies(getIt);
 
   // Features
   configureSplashDependencies(getIt);

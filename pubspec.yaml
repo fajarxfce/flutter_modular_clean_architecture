@@ -29,6 +29,7 @@ workspace:
   - packages/core/network
   - packages/core/widgets
   - packages/core/database
+  - packages/core/analytics
   - packages/features/login/data
   - packages/features/login/domain
   - packages/features/login/presentation

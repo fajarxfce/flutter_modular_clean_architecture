@@ -16,6 +16,15 @@ dependencies:
   injectable:
   auto_route:
   get_it:
+
+  # Firebase
+  firebase_core:
+  firebase_crashlytics:
+  firebase_analytics:
+
+  # Core packages
+  analytics:
+    path: ../packages/core/analytics
   shared:
     path: ../packages/shared
   network:
