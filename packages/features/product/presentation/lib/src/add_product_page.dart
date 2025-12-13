@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:blocfx/blocfx.dart';
 import 'package:flutter/material.dart';
 import 'package:product_presentation/src/bloc/add/add_product_bloc.dart';
@@ -133,12 +135,41 @@ class _AddProductPageState
         ),
         const SizedBox(height: 24),
 
-        BlocSelector<AddProductBloc, AddProductState, TextInput>(
-          selector: (state) => state.price,
-          builder: (context, price) {
-            return Text(
-              'You entered price: ${price.value}',
-              style: Theme.of(context).textTheme.bodyMedium,
+        BlocSelector<
+          AddProductBloc,
+          AddProductState,
+          ({String? imageError, List<String> imagePaths})
+        >(
+          selector: (state) =>
+              (imageError: state.imageError, imagePaths: state.imagePaths),
+          builder: (context, value) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppImagePicker(
+                  maxImages: 5,
+                  imageSize: 100,
+                  label: 'Product Images',
+                  helperText: 'Add up to 5 images for this product',
+                  initialFiles: value.imagePaths
+                      .map((path) => File(path))
+                      .toList(),
+                  onImagesChanged: (images) {
+                    final paths = images.map((file) => file.path).toList();
+                    bloc.add(ImagesChangedEvent(paths));
+                  },
+                ),
+                if (value.imageError != null) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    value.imageError ?? '',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                ],
+              ],
             );
           },
         ),
@@ -150,11 +181,13 @@ class _AddProductPageState
           builder: (context, status) {
             final isLoading = status == AddProductStatus.loading;
             final isValid = context.select(
-              (AddProductBloc bloc) => Formz.validate([
-                bloc.state.name,
-                bloc.state.description,
-                bloc.state.price,
-              ]),
+              (AddProductBloc bloc) =>
+                  Formz.validate([
+                    bloc.state.name,
+                    bloc.state.description,
+                    bloc.state.price,
+                  ]) &&
+                  bloc.state.hasValidImages, // Include image validation
             );
 
             return AppButton.primary(

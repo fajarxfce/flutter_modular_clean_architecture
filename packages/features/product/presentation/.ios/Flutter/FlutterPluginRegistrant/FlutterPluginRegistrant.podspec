@@ -23,6 +23,7 @@ Depends on all your plugins, and provides a function to register them.
   s.dependency 'firebase_core'
   s.dependency 'firebase_crashlytics'
   s.dependency 'flutter_secure_storage'
+  s.dependency 'image_picker_ios'
   s.dependency 'path_provider_foundation'
   s.dependency 'shared_preferences_foundation'
 end

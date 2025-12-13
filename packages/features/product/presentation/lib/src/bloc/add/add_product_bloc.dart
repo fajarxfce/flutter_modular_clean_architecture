@@ -16,6 +16,7 @@ class AddProductBloc
     on<NameChangedEvent>(_onNameChanged);
     on<PriceChangedEvent>(_onPriceChanged);
     on<DescriptionChangedEvent>(_onDescriptionChanged);
+    on<ImagesChangedEvent>(_onImagesChanged);
   }
 
   @override
@@ -66,5 +67,20 @@ class AddProductBloc
   ) async {
     final descriptionInput = TextInput.dirty(event.description);
     emit(state.copyWith(description: descriptionInput));
+  }
+
+  Future<void> _onImagesChanged(
+    ImagesChangedEvent event,
+    Emitter<AddProductState> emit,
+  ) async {
+    // Custom validation (not Formz)
+    String? error;
+    if (event.imagePaths.isEmpty) {
+      error = 'Please add at least one image';
+    } else if (event.imagePaths.length > 5) {
+      error = 'Maximum 5 images allowed';
+    }
+
+    emit(state.copyWith(imagePaths: event.imagePaths, imageError: error));
   }
 }

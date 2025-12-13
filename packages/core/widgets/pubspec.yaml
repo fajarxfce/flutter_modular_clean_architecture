@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   formz:
+  image_picker:
 
   cupertino_icons:
 

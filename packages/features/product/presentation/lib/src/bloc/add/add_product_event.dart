@@ -24,4 +24,10 @@ class DescriptionChangedEvent extends AddProductEvent {
   DescriptionChangedEvent(this.description);
 }
 
+class ImagesChangedEvent extends AddProductEvent {
+  final List<String> imagePaths;
+
+  ImagesChangedEvent(this.imagePaths);
+}
+
 class ResetAddProductEvent extends AddProductEvent {}
