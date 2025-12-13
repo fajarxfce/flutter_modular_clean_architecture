@@ -264,9 +264,9 @@ class _AppTextFieldState extends State<AppTextField> {
     );
   }
 
-  double _getHeight() {
+  double? _getHeight() {
     if (widget.maxLines != null && widget.maxLines! > 1) {
-      return double.infinity; // Let it expand for multiline
+      return null; // Let TextField manage its own height for multiline
     }
 
     switch (widget.size) {

@@ -22,6 +22,12 @@ class ProductPage
     return Scaffold(
       appBar: AppBar(title: const Text('Product Page')),
       body: const Center(child: Text('This is the Product sss')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          bloc.add(OnNavigateToAddProduct());
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:blocfx/blocfx.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/di/di.dart';
 import 'package:app/src/router/app_router.dart';
@@ -17,6 +18,8 @@ Future<void> main() async {
 
   // Setup DI
   configureDependencies();
+
+  BlocFxPersistence.initialize();
 
   runApp(const App());
 }

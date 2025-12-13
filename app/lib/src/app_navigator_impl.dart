@@ -46,11 +46,6 @@ class AppNavigatorImpl implements AppNavigator {
   }
 
   @override
-  Future<T?> navigateToAddProduct<T>() async {
-    throw UnimplementedError('AddProductRoute not created yet');
-  }
-
-  @override
   Future<void> navigateToMain() {
     return _appRouter.replace(MainRoute());
   }
@@ -65,5 +60,10 @@ class AppNavigatorImpl implements AppNavigator {
   @override
   Future<void> navigateToProduct() async {
     await _appRouter.push(ProductRoute());
+  }
+
+  @override
+  Future<T?> navigateToAddProduct<T>() {
+    return _appRouter.push<T>(AddProductRoute());
   }
 }

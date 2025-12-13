@@ -22,6 +22,8 @@ dependencies:
   firebase_crashlytics:
   firebase_analytics:
 
+  blocfx:
+
   # Core packages
   analytics:
     path: ../packages/core/analytics

@@ -1,13 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:shared/shared.dart';
 
-abstract class BasePageState<T extends StatefulWidget, B extends BaseBloc>
+abstract class BasePageState<T extends StatefulWidget, B extends Bloc>
     extends BasePageStateDelegate<T, B> {}
 
-abstract class BasePageStateDelegate<
-  T extends StatefulWidget,
-  B extends BaseBloc
->
+abstract class BasePageStateDelegate<T extends StatefulWidget, B extends Bloc>
     extends State<T> {
   late final B bloc = GetIt.instance<B>();
 
